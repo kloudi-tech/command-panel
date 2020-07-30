@@ -14,7 +14,7 @@ WAI-ARIA compliant React command palette like the one in Atom and Sublime
 
 ## Live Playground
 
-For examples of the command palette in action, go to the 
+For examples of the command palette in action, go to the
 
 [![Storybook](https://github.com/storybooks/brand/raw/master/badge/badge-storybook.svg?sanitize=true)](https://react-command-palette.js.org)
 
@@ -46,48 +46,57 @@ const commands = [{
     name: "Bar",
     command() {}
   }
-  ... 
+  ...
  ];
- 
+
  ReactDOM.render(
-  <CommandPalette commands={commands} />, 
+  <CommandPalette commands={commands} />,
   document.getElementById('app'))
 ```
 
 ## Props
 
-* ```open``` a _boolean_, when set to true it forces the command palette to be displayed. Defaults to "false".
-
 * ```alwaysRenderCommands``` a boolean, Set it to true if you'd like to render suggestions even when the input is not focused.
+
+* ```closeOnSelect``` a _boolean_, when set to true the command palette will close immediately when the user makes a selection. Defaults to "false".
+
+* ```commands``` appears in the command palette. For each command in the array the object must have a _name_ and a _command_. The _name_ is a user friendly string that will be display to the user. The command is a function that will be executed when the user clicks or presses the enter key. Commands may also include custom properties where "this" will be bound to the command, for example:
+
+  ```js
+    {
+      id: 1,
+      color: 'pink',
+      name: "Foo",
+      command() {
+        document.location.href = `somepage.html?id=${this.id}&color=${this.color}`;
+      }
+    },
+    ...
+  ```
+
+* ```defaultInputValue``` a _string_ that determines the value of the text in the input field. By default the defaultInputValue is an empty string.
 
 * ```display``` one of "modal" or "inline", when set to "modal" the command palette is rendered centered inside a modal. When set to "inline", it is render inline with other page content. Defaults to "modal".
 
 * ```header``` a _string_ or a _React.ComponentType_ which provides a helpful description for the usage of the command palette. The component is displayed at the top of the command palette. The header is not displayed by default. see: examples/sampleInstruction.js for reference.
 
-* ```closeOnSelect``` a _boolean_, when set to true the command palette will close immediately when the user makes a selection. Defaults to "false".
-
-* ```resetInputOnClose``` a _boolean_ which indicates whether to reset the user's query to `defaultInputValue` when the command palette closes. Defaults to "false".
-
-* ```placeholder``` a _string_ that contains a short text description which is displayed inside the the input field until the user provides input. Defaults to "Type a command".
+* ```highlightFirstSuggestion```  a _boolean_, will automatically highlight the first suggestion. Defaults to "true". */
 
 * ```hotKeys``` a _string_ or _array of strings_ that contain a keyboard shortcut for opening/closing the palette. Defaults to "_command+shift+p_". Uses [mousetrap key combos](https://craig.is/killing/mice)
 
-* ```defaultInputValue``` a _string_ that determines the value of the text in the input field. By default the defaultInputValue is an empty string.
+* ```maxDisplayed``` a _number_ between 1 and 500 that determines the maximum number of commands that will be rendered on screen. Defaults to 7
 
-* ```highlightFirstSuggestion```  a _boolean_, will automatically highlight the first suggestion. Defaults to "true". */
-
-* ```options``` options controls how fuzzy search is configured. Note: use at your own risk, this is likely to change in the future. The search options are derived from these [fuzzysort options](https://github.com/farzher/fuzzysort#options). However the command palette options prop must have the following values included to function correctly:
+* ```onAfterOpen``` a function that fires after the command palette modal is opened.
 
   ```js
-    key: "name", // default is "name"
-    keys: ["name"], // default is "name"
-
-    // other options may be freely configured
-    threshold: -Infinity, 
-    limit: 7,
-    allowTypo: true, 
-    scoreFn: null 
+    <CommandPalette
+      commands={commands}
+      onAfterOpen={() => {
+        alert("The palette was opened.");
+      }}
+    />
   ```
+
 * ```onChange``` a function that's called when the input value changes. It returns two values: the current value of the input field followed by the users typed input. The query ignores keyboard navigation and clicks.
 
   ```js
@@ -104,7 +113,7 @@ const commands = [{
     />
   ```
 
-* ```onHighlight``` a function that's called when the highlighted suggestion changes. 
+* ```onHighlight``` a function that's called when the highlighted suggestion changes.
 
   ```js
     <CommandPalette
@@ -130,16 +139,6 @@ const commands = [{
     />
   ```
 
-* ```onAfterOpen``` a function that fires after the command palette modal is opened.
-
-  ```js
-    <CommandPalette
-      commands={commands}
-      onAfterOpen={() => {
-        alert("The palette was opened.");
-      }}
-    />
-  ```
 
 * ```onRequestClose``` a function that will be run when the modal is requested to be closed (either by clicking on overlay or pressing ESC)
 Note: It is not called if _open_ is changed by other means. Passes through to the [react-modal prop](http://reactcommunity.org/react-modal/examples/on_request_close.html).
@@ -153,21 +152,23 @@ Note: It is not called if _open_ is changed by other means. Passes through to th
     />
   ```
 
-* ```shouldReturnFocusAfterClose``` a boolean (default is _true_) indicate if the modal should restore focus to the element that had focus prior to its display. 
+* ```open``` a _boolean_, when set to true it forces the command palette to be displayed. Defaults to "false".
 
-* ```commands``` appears in the command palette. For each command in the array the object must have a _name_ and a _command_. The _name_ is a user friendly string that will be display to the user. The command is a function that will be executed when the user clicks or presses the enter key. Commands may also include custom properties where "this" will be bound to the command, for example:
+* ```options``` options controls how fuzzy search is configured. Note: use at your own risk, this is likely to change in the future. The search options are derived from these [fuzzysort options](https://github.com/farzher/fuzzysort#options). However the command palette options prop must have the following values included to function correctly:
 
   ```js
-    {
-      id: 1,
-      color: 'pink',
-      name: "Foo",
-      command() {
-        document.location.href = `somepage.html?id=${this.id}&color=${this.color}`;
-      }
-    },
-    ...
+    key: "name", // default is "name"
+    keys: ["name"], // default is "name"
+
+    // other options may be freely configured
+    threshold: -Infinity,
+    limit: 7,
+    allowTypo: true,
+    scoreFn: null
   ```
+
+* ```placeholder``` a _string_ that contains a short text description which is displayed inside the the input field until the user provides input. Defaults to "Type a command".
+
 
 * ```reactModalParentSelector``` a selector compatible with querySelector. By default, the modal portal will be appended to the document's body. You can choose a different parent element by selector. If you do this, please ensure that your app element is set correctly. The app element should not be a parent of the modal, to prevent modal content from being hidden to screenreaders while it is open.
 
@@ -201,16 +202,22 @@ Note: It is not called if _open_ is changed by other means. Passes through to th
   />
   ```
   see: https://github.com/moroshko/react-autosuggest#rendersuggestion-required.
- 
+
   Note: the _suggestion.highlight_ will contain the rendered markup from [fuzzysort](farzher/fuzzysort#fuzzysorthighlightresult-openb-closeb), see the ```options``` prop. If the ```options``` prop contains an array of "keys" then then _suggestion.highlight_ will contain an array of matches, see: [fuzzysort advanced usage](https://github.com/farzher/fuzzysort#advanced-usage) or checkout the [sampleChromeCommand.js](examples/sampleChromeCommand.js)
 
-  *Important:* _renderCommand_ must be a pure function (react-autosuggest, upon which this is based will optimize rendering performance based on this assumption).
+  *Important:* _renderCommand_ must be a pure function (react-autosuggest, upon
+  which this is based will optimize rendering performance based on this
+  assumption).
 
-* ```maxDisplayed``` a _number_ between 1 and 500 that determines the maximum number of commands that will be rendered on screen. Defaults to 7
+* ```resetInputOnClose``` a _boolean_ which indicates whether to reset the
+  user's query to `defaultInputValue` when the command palette closes. Defaults
+  to "false".
 
-* ```spinner``` a _string_ or a _React.ComponentType_ that is displayed when the user selects an item. If a custom spinner is not set then the default spinner will be used. If a custom component or string is provided then it will automatically be wrapped inside a div with a _role="status"_ attribute. If a component is provided then it will be be wrapped in a div that also contains a sibling node with a div contain "Loading..." visible only to screen readers.
+* ```shouldReturnFocusAfterClose``` a boolean (default is _true_) indicate if the modal should restore focus to the element that had focus prior to its display.
 
 * ```showSpinnerOnSelect``` a _boolean_ which displays a loading indicator immediately after a command has been selected. When true the spinner is enabled when false the spinner is disabled. Useful when dynamically loading lists of a commands based upon user selections. Setting both _showSpinnerOnSelect_ and  _closeOnSelect_ to false will keep the palette open and allow a new list of commands to be loaded, see the [dynamic lists example](https://codesandbox.io/s/react-command-palette-dynamic-lists-p2xo9?fontsize=14&hidenavigation=1&theme=dark).
+
+* ```spinner``` a _string_ or a _React.ComponentType_ that is displayed when the user selects an item. If a custom spinner is not set then the default spinner will be used. If a custom component or string is provided then it will automatically be wrapped inside a div with a _role="status"_ attribute. If a component is provided then it will be be wrapped in a div that also contains a sibling node with a div contain "Loading..." visible only to screen readers.
 
 * ```theme``` enables you to apply a sample or custom look-n-feel.
   Two themes are included with the command palette, Chrome and Atom. The CommandPalette comes with the Atom theme enabled default.
