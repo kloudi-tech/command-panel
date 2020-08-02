@@ -1,8 +1,8 @@
 /* eslint-disable no-alert */
 /* eslint-disable react/jsx-one-expression-per-line */
-import * as React from "react";
+import * as React from 'react';
 // eslint-disable-next-line no-unused-vars
-import { storiesOf } from "@storybook/react";
+import { storiesOf } from '@storybook/react';
 
 // storybook addons
 import {
@@ -11,104 +11,213 @@ import {
   object,
   number,
   text,
-  boolean
-} from "@storybook/addon-knobs";
-import { withInfo } from "@storybook/addon-info";
-import { withOptions } from "@storybook/addon-options";
-import { withTests } from "@storybook/addon-jest";
-import { checkA11y } from "@storybook/addon-a11y";
+  boolean,
+} from '@storybook/addon-knobs';
+import { withInfo } from '@storybook/addon-info';
+import { withOptions } from '@storybook/addon-options';
+import { withTests } from '@storybook/addon-jest';
+import { withA11y } from '@storybook/addon-a11y';
 
 // sample component
-import sampleHeader from "../examples/sampleHeader";
-import sampleAtomCommand from "../examples/sampleAtomCommand";
-import sampleChromeCommand from "../examples/sampleChromeCommand";
-import sampleSublimeCommand from "../examples/sampleSublimeCommand";
+import sampleHeader from '../examples/sampleHeader';
+import sampleAtomCommand from '../examples/sampleAtomCommand';
+import sampleChromeCommand from '../examples/sampleChromeCommand';
+import sampleSublimeCommand from '../examples/sampleSublimeCommand';
 
 // sample styles
-import "../themes/chrome.css";
-import "../themes/atom.css";
-import "../themes/sublime.css";
-import chrome from "../themes/chrome-theme";
-import atom from "../themes/atom-theme";
-import sublime from "../themes/sublime-theme";
+import '../themes/chrome.css';
+import '../themes/atom.css';
+import '../themes/sublime.css';
+import chrome from '../themes/chrome-theme';
+import atom from '../themes/atom-theme';
+import sublime from '../themes/sublime-theme';
+
+// Kloudi
+import '../kloudi/kloudi.css';
+import kloudi from '../kloudi/kloudi-theme';
+import view from '../kloudi/query-suggestions/item';
+import header from '../kloudi/kloudi-header';
 
 // command palette scripts
-import CommandPalette from "../src/command-palette";
-import commands from "../src/__mocks__/commands";
-import lotsOfCommands from "../src/__mocks__/lots_of_commands";
-import results from "../.jest-test-results.json";
+import CommandPalette from '../src/command-palette';
+import commands from '../src/__mocks__/commands';
+import suggestions from '../kloudi/__mocks__/query-suggestions';
+import lotsOfCommands from '../src/__mocks__/lots_of_commands';
+import results from '../.jest-test-results.json';
 
 // add noop command to this big list of command names
 function addCommandToArray(c) {
-  return c.map(item => ({
+  return c.map((item) => ({
     name: item.name,
-    command: Function.prototype
+    command: Function.prototype,
   }));
 }
 
 function Trigger() {
   return (
-    <button type="button">
-      Press &ldquo;<kbd>shft+/</kbd>&rdquo; to run a command
+    <button type='button'>
+      Press &ldquo;<kbd>command/ctrl+k</kbd>&rdquo; to run a command
     </button>
   );
 }
 
 const proccessedCommands = addCommandToArray(lotsOfCommands);
 
-storiesOf("Command Palette", module)
+storiesOf('Kloudi Command Panel', module)
   .addDecorator(
     withOptions({
-      name: "Command Palette",
-      addonPanelInRight: false
+      name: 'Command Palette',
+      addonPanelInRight: false,
     })
   )
   .addDecorator(withInfo)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .addDecorator(withKnobs)
-  .addDecorator(story => (
+  .addDecorator((story) => (
     <div
       style={{
-        position: "relative",
-        minHeight: "764px",
-        minWidth: "428px"
+        position: 'relative',
+        minHeight: '764px',
+        minWidth: '428px',
       }}
     >
       {story()}
     </div>
   ))
   .addDecorator(withTests({ results }))
-  .addParameters({ jest: ["command-palette.test.js"] })
+  .addParameters({ jest: ['command-palette.test.js'] })
   .addParameters({
     info: {
       disabled: false,
       inline: false,
-      header: false
-    }
+      header: false,
+    },
   })
-  .add("with everything", () => (
+  .add('popup config', () => (
+    <CommandPalette
+      alwaysRenderCommands
+      /*
+       * - If closeOnSelect is false then when the command is selected a loading
+       *   indicator comes.
+       * - If closeOnSelect is true then when the command is selected then the
+       *   suggestions closes
+       *  In pop we need to control it with code.
+       */
+      commands={suggestions}
+      header={header()}
+      // highlightFirstSuggestion={false}
+      hotKeys={['command+k', 'ctrl+k']}
+      maxDisplayed={100}
+      onSelect={(command) => {
+        alert(`A suggested command was selected: \n
+        ${JSON.stringify(command)}
+        `);
+      }}
+      placeholder='Search'
+      renderCommand={view}
+      // showSpinnerOnSelect={false}
+      theme={kloudi}
+    />
+  ))
+  .add('homepage config', () => (
+    <CommandPalette
+      //Depending on where this is opened we'll have to toggle this
+      alwaysRenderCommands={false}
+      /*
+       * - If closeOnSelect is false then when the command is selected a loading
+       *   indicator comes.
+       * - If closeOnSelect is true then when the command is selected then the
+       *   suggestions closes
+       */
+      closeOnSelect={false}
+      commands={commands}
+      // On home page the setting will be inline else it will be modal
+      display={'inline'}
+      header={sampleHeader()}
+      renderCommand={sampleAtomCommand}
+      maxDisplayed={6}
+      trigger={Trigger()}
+      hotKeys={['command+k', 'ctrl+k']}
+      open
+    />
+  ))
+  .add('onboarding step 1-4 config', () => (
+    <CommandPalette
+      //Depending on where this is opened we'll have to toggle this
+      alwaysRenderCommands={false}
+      /*
+       * - If closeOnSelect is false then when the command is selected a loading
+       *   indicator comes.
+       * - If closeOnSelect is true then when the command is selected then the
+       *   suggestions closes
+       */
+      closeOnSelect={false}
+      commands={commands}
+      defaultInputValue={'Show me onboarding tools'}
+      // On home page the setting will be inline else it will be modal
+      display={'inline'}
+      header={sampleHeader()}
+      renderCommand={sampleAtomCommand}
+      maxDisplayed={6}
+      trigger={Trigger()}
+      hotKeys={['command+k', 'ctrl+k']}
+      open
+    />
+  ));
+
+storiesOf('Command Pallete', module)
+  .addDecorator(
+    withOptions({
+      name: 'Command Palette',
+      addonPanelInRight: false,
+    })
+  )
+  .addDecorator(withInfo)
+  .addDecorator(withA11y)
+  .addDecorator(withKnobs)
+  .addDecorator((story) => (
+    <div
+      style={{
+        position: 'relative',
+        minHeight: '764px',
+        minWidth: '428px',
+      }}
+    >
+      {story()}
+    </div>
+  ))
+  .addDecorator(withTests({ results }))
+  .addParameters({ jest: ['command-palette.test.js'] })
+  .addParameters({
+    info: {
+      disabled: false,
+      inline: false,
+      header: false,
+    },
+  })
+  .add('with everything', () => (
     <CommandPalette
       commands={commands}
       renderCommand={sampleAtomCommand}
       header={sampleHeader()}
       maxDisplayed={6}
       trigger={Trigger()}
-      hotKeys="shift+/"
+      hotKeys='shift+/'
       open
     />
   ))
-  .add("with a theme", () => {
-    const label = "theme";
+  .add('with a theme', () => {
+    const label = 'theme';
     const options = {
       Chrome: chrome,
       Atom: atom,
-      Sublime: sublime
+      Sublime: sublime,
     };
     const defaultValue = chrome;
     const theme = select(label, options, defaultValue);
     return <CommandPalette commands={commands} theme={theme} open />;
   })
-  .add("atom theme", () => (
+  .add('atom theme', () => (
     <CommandPalette
       commands={commands}
       renderCommand={sampleAtomCommand}
@@ -116,7 +225,7 @@ storiesOf("Command Palette", module)
       open
     />
   ))
-  .add("chrome theme", () => (
+  .add('chrome theme', () => (
     <CommandPalette
       commands={commands}
       renderCommand={sampleChromeCommand}
@@ -125,13 +234,13 @@ storiesOf("Command Palette", module)
     />
   ))
   .add(
-    "sublime theme",
+    'sublime theme',
     () => (
       <CommandPalette
         commands={commands}
         renderCommand={sampleSublimeCommand}
         theme={sublime}
-        placeholder=""
+        placeholder=''
         maxDisplayed={12}
         open
       />
@@ -139,47 +248,55 @@ storiesOf("Command Palette", module)
     {
       backgrounds: [
         {
-          name: "dark",
-          value: "rgba(39, 40, 34)",
-          default: true
-        }
-      ]
+          name: 'dark',
+          value: 'rgba(39, 40, 34)',
+          default: true,
+        },
+      ],
     }
   )
   .add(
-    "with a custom command",
-    () => <CommandPalette commands={commands} renderCommand={sampleAtomCommand} open />,
+    'with a custom command',
+    () => (
+      <CommandPalette
+        commands={commands}
+        renderCommand={sampleAtomCommand}
+        open
+      />
+    ),
     {
       info: {
-        text: `By default, react-command-palette will render the _suggestion.name_ for each command.  However, when passed a custom react component _renderCommand_ will display the command using any template you can imagine. See: https://github.com/asabaylus/react-command-palette/blob/master/examples/sampleAtomCommand.js`
-      }
+        text: `By default, react-command-palette will render the _suggestion.name_ for each command.  However, when passed a custom react component _renderCommand_ will display the command using any template you can imagine. See: https://github.com/asabaylus/react-command-palette/blob/master/examples/sampleAtomCommand.js`,
+      },
     }
   )
-  .add("is toggled open", () => <CommandPalette commands={commands} open />, {
+  .add('is toggled open', () => <CommandPalette commands={commands} open />, {
     info: {
-      text: `Adding an _open_ prop will force the command palette to be displayed 
+      text: `Adding an _open_ prop will force the command palette to be displayed
       when it mounts. By default command palette will be hidden until the _trigger_
-      is cliked.`
-    }
+      is cliked.`,
+    },
   })
-  .add("with defaults", () => {
+  .add('with defaults', () => {
     // Knobs Addon for Commands object
-    const commandsInput = object("Commands", commands);
+    const commandsInput = object('Commands', commands);
     return <CommandPalette commands={commandsInput} />;
   })
-  .add("without a modal", () => <CommandPalette commands={commands} display="inline" />)
-  .add("onSelect", () => (
+  .add('without a modal', () => (
+    <CommandPalette commands={commands} display='inline' />
+  ))
+  .add('onSelect', () => (
     <CommandPalette
       open
       commands={commands}
-      onSelect={command => {
+      onSelect={(command) => {
         alert(`A suggested command was selected: \n
         ${JSON.stringify(command)}
         `);
       }}
     />
   ))
-  .add("onChange", () => (
+  .add('onChange', () => (
     <CommandPalette
       open
       commands={commands}
@@ -194,127 +311,135 @@ storiesOf("Command Palette", module)
       }}
     />
   ))
-  .add("highlightFirstSuggestion", () => {
-    const label = "highlightFirstSuggestion";
+  .add('highlightFirstSuggestion', () => {
+    const label = 'highlightFirstSuggestion';
     const defaultValue = true;
     const highlight = boolean(label, defaultValue);
-    return <CommandPalette
-      commands={commands}
-      highlightFirstSuggestion={highlight}
-      open
+    return (
+      <CommandPalette
+        commands={commands}
+        highlightFirstSuggestion={highlight}
+        open
       />
+    );
   })
-  .add("onHighlight", () => (
+  .add('onHighlight', () => (
     <CommandPalette
       commands={commands}
-      onHighlight={command => {
+      onHighlight={(command) => {
         console.log(`A command was highlighted ${JSON.stringify(command)}`);
       }}
       open
     />
   ))
-  .add("onAfterOpen", () => (
+  .add('onAfterOpen', () => (
     <CommandPalette
       commands={commands}
       onAfterOpen={() => {
-        alert("The palette was opened.");
+        alert('The palette was opened.');
       }}
     />
   ))
-  .add("onRequestClose", () => (
+  .add('onRequestClose', () => (
     <CommandPalette
       commands={commands}
       onRequestClose={() => {
-        alert("The palette will close.");
+        alert('The palette will close.');
       }}
     />
   ))
   .add(
-    "with a custom trigger",
-    () => <CommandPalette commands={commands} trigger="Click Me!" />,
+    'with a custom trigger',
+    () => <CommandPalette commands={commands} trigger='Click Me!' />,
     {
       info: {
-        text: `Use the _trigger_ prop to customize the component that the user 
+        text: `Use the _trigger_ prop to customize the component that the user
         will click to open the command palette. The property accepts either a
-        string or a React component. Note that component will be wrapped with a 
+        string or a React component. Note that component will be wrapped with a
         _div_ that behaves like a button. So there is no need to add any events.
         This component will also be focusable and may be activated via keyboard
-        to maintain accessibility. If a trigger is not specified then the a 
+        to maintain accessibility. If a trigger is not specified then the a
         default command palette will be used.
-        `
-      }
+        `,
+      },
     }
   )
-  .add("defaultInputValue", () => (
-    <CommandPalette commands={commands} open defaultInputValue=">" />
+  .add('defaultInputValue', () => (
+    <CommandPalette commands={commands} open defaultInputValue='>' />
   ))
-  .add("alwaysRenderCommands", () => (
+  .add('alwaysRenderCommands', () => (
     <CommandPalette
       commands={commands}
       open
-      alwaysRenderCommands={boolean("alwaysRenderCommands", false)}
+      alwaysRenderCommands={boolean('alwaysRenderCommands', false)}
     />
   ))
-  .add("showSpinnerOnSelect", () => (
+  .add('showSpinnerOnSelect', () => (
     <CommandPalette
       commands={commands}
       open
-      showSpinnerOnSelect={boolean("showSpinnerOnSelect", true)}
+      showSpinnerOnSelect={boolean('showSpinnerOnSelect', true)}
     />
   ))
-  .add("with custom hotkeys", () => <CommandPalette commands={commands} hotKeys="/" />)
-  .add("with multiple custom hotkeys", () => (
-    <CommandPalette commands={commands} hotKeys={["/", "command+k"]} />
+  .add('with custom hotkeys', () => (
+    <CommandPalette commands={commands} hotKeys='/' />
   ))
-  .add("with custom header", () => (
+  .add('with multiple custom hotkeys', () => (
+    <CommandPalette commands={commands} hotKeys={['/', 'command+k']} />
+  ))
+  .add('with custom header', () => (
     <CommandPalette commands={commands} header={sampleHeader()} open />
   ))
-  .add("with closeOnSelect", () => (
+  .add('with closeOnSelect', () => (
     <CommandPalette commands={commands} closeOnSelect open />
   ))
-  .add("with resetInputOnClose", () => (
+  .add('with resetInputOnClose', () => (
     <CommandPalette commands={commands} open resetInputOnClose />
   ))
-  .add("with custom placeholder", () => (
+  .add('with custom placeholder', () => (
     <CommandPalette
       commands={commands}
-      placeholder={text("placeholder", "What do you want?")}
+      placeholder={text('placeholder', 'What do you want?')}
       open
     />
   ))
-  .add("with lots of commands", () => (
+  .add('with lots of commands', () => (
     <CommandPalette commands={proccessedCommands} open />
   ))
-  .add("with a custom spinner", () => (
+  .add('with a custom spinner', () => (
     <CommandPalette
       commands={commands}
-      spinner={<div style={{ color: "white", textAlign: "center" }}>Waiting...</div>}
+      spinner={
+        <div style={{ color: 'white', textAlign: 'center' }}>Waiting...</div>
+      }
       open
     />
   ))
-  .add("with max displayed", () => {
-    const label = "maxDisplayed";
+  .add('with max displayed', () => {
+    const label = 'maxDisplayed';
     const defaultValue = 3;
     const options = {
       range: true,
       min: 1,
       max: commands.length,
-      step: 1
+      step: 1,
     };
     const maxDisplayed = number(label, defaultValue, options);
-    return <CommandPalette commands={commands} maxDisplayed={maxDisplayed} open />;
+    return (
+      <CommandPalette commands={commands} maxDisplayed={maxDisplayed} open />
+    );
   })
-  .add("with search options", () => {
+  .add('with search options', () => {
     // Knobs for Search Options Object
     const opts = {
       threshold: -Infinity,
       limit: 100,
       allowTypo: true,
-      key: "name",
-      keys: ["name"],
-      scoreFn: null
+      key: 'name',
+      keys: ['name'],
+      scoreFn: null,
     };
-    const searchOptionsInput = object("Search Options", opts);
+    const searchOptionsInput = object('Search Options', opts);
     return (
       <CommandPalette
         commands={proccessedCommands}
@@ -324,9 +449,9 @@ storiesOf("Command Palette", module)
       />
     );
   })
-  .add("with multiple highlights", () => {
+  .add('with multiple highlights', () => {
     const opts = {
-      keys: ["name", "category"]
+      keys: ['name', 'category'],
     };
     return (
       <CommandPalette
@@ -339,8 +464,12 @@ storiesOf("Command Palette", module)
       />
     );
   })
-  .add("with reactModalParentSelector", () => (
-    <div id="main">
-      <CommandPalette commands={commands} reactModalParentSelector="#main" open />
+  .add('with reactModalParentSelector', () => (
+    <div id='main'>
+      <CommandPalette
+        commands={commands}
+        reactModalParentSelector='#main'
+        open
+      />
     </div>
   ));

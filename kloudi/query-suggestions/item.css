@@ -1,0 +1,70 @@
+@import './kbcd.css';
+
+.kloudi-query-item {
+  display: flex;
+  height: 32px;
+}
+
+.kloudi-query-category {
+  color: #fff;
+  margin-right: 6px;
+  border-radius: 2px;
+  padding: 1.2px 3px;
+  margin: auto 0px;
+}
+
+.kloudi-query-shortcut {
+  margin: auto 8px auto auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.kloudi-query-shortcut-text {
+  font-size: 14px;
+  margin: auto 6px;
+}
+
+.kloudi-query-icon {
+  width: 20px;
+  height: 20px;
+  margin: auto 0px;
+}
+
+.kloudi-query-text {
+  max-width: 420px;
+  margin: auto 0px 4px 16px;
+  outline: none;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.search {
+  margin: auto 4px;
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: #9b9b9b;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.search:hover {
+  stroke: #4a4a4a;
+}
+
+.kloudi-query-category.Command {
+  background: rgb(67, 130, 207);
+}
+.kloudi-query-category.Navigate {
+  background: rgb(165, 22, 134);
+}
+.kloudi-query-category.Network {
+  background: rgb(46, 41, 194);
+}
+.kloudi-query-category.System {
+  background: rgb(49, 177, 79);
+}
+.kloudi-query-category.Drawer {
+  background: rgb(206, 64, 206);
+}
