@@ -1,8 +1,8 @@
 /* eslint-disable no-alert */
 /* eslint-disable react/jsx-one-expression-per-line */
-import * as React from 'react';
+import * as React from "react";
 // eslint-disable-next-line no-unused-vars
-import { storiesOf } from '@storybook/react';
+import { storiesOf } from "@storybook/react";
 
 // storybook addons
 import {
@@ -12,38 +12,32 @@ import {
   number,
   text,
   boolean,
-} from '@storybook/addon-knobs';
-import { withInfo } from '@storybook/addon-info';
-import { withOptions } from '@storybook/addon-options';
-import { withTests } from '@storybook/addon-jest';
-import { withA11y } from '@storybook/addon-a11y';
+} from "@storybook/addon-knobs";
+import { withInfo } from "@storybook/addon-info";
+import { withOptions } from "@storybook/addon-options";
+import { withTests } from "@storybook/addon-jest";
+import { withA11y } from "@storybook/addon-a11y";
 
 // sample component
-import sampleHeader from '../examples/sampleHeader';
-import sampleAtomCommand from '../examples/sampleAtomCommand';
-import sampleChromeCommand from '../examples/sampleChromeCommand';
-import sampleSublimeCommand from '../examples/sampleSublimeCommand';
+import sampleHeader from "../examples/sampleHeader";
+import sampleAtomCommand from "../examples/sampleAtomCommand";
+import sampleChromeCommand from "../examples/sampleChromeCommand";
+import sampleSublimeCommand from "../examples/sampleSublimeCommand";
 
 // sample styles
-import '../themes/chrome.css';
-import '../themes/atom.css';
-import '../themes/sublime.css';
-import chrome from '../themes/chrome-theme';
-import atom from '../themes/atom-theme';
-import sublime from '../themes/sublime-theme';
-
-// Kloudi
-import '../kloudi/kloudi.css';
-import kloudi from '../kloudi/kloudi-theme';
-import view from '../kloudi/query-suggestions/item';
-import header from '../kloudi/kloudi-header';
+import "../themes/chrome.css";
+import "../themes/atom.css";
+import "../themes/sublime.css";
+import chrome from "../themes/chrome-theme";
+import atom from "../themes/atom-theme";
+import sublime from "../themes/sublime-theme";
 
 // command palette scripts
-import CommandPalette from '../src/command-palette';
-import commands from '../src/__mocks__/commands';
-import suggestions from '../kloudi/__mocks__/query-suggestions';
-import lotsOfCommands from '../src/__mocks__/lots_of_commands';
-import results from '../.jest-test-results.json';
+import CommandPalette from "../src/command-palette";
+import commands from "../src/__mocks__/commands";
+import lotsOfCommands from "../src/__mocks__/lots_of_commands";
+import results from "../.jest-test-results.json";
+import ModalCommandPanel from "../kloudi/components/modal-command-panel/ModalCommandPanel";
 
 // add noop command to this big list of command names
 function addCommandToArray(c) {
@@ -55,7 +49,7 @@ function addCommandToArray(c) {
 
 function Trigger() {
   return (
-    <button type='button'>
+    <button type="button">
       Press &ldquo;<kbd>command/ctrl+k</kbd>&rdquo; to run a command
     </button>
   );
@@ -63,10 +57,10 @@ function Trigger() {
 
 const proccessedCommands = addCommandToArray(lotsOfCommands);
 
-storiesOf('Kloudi Command Panel', module)
+storiesOf("Kloudi Command Panel", module)
   .addDecorator(
     withOptions({
-      name: 'Command Palette',
+      name: "Command Palette",
       addonPanelInRight: false,
     })
   )
@@ -76,16 +70,16 @@ storiesOf('Kloudi Command Panel', module)
   .addDecorator((story) => (
     <div
       style={{
-        position: 'relative',
-        minHeight: '764px',
-        minWidth: '428px',
+        position: "relative",
+        minHeight: "764px",
+        minWidth: "428px",
       }}
     >
       {story()}
     </div>
   ))
   .addDecorator(withTests({ results }))
-  .addParameters({ jest: ['command-palette.test.js'] })
+  .addParameters({ jest: ["command-palette.test.js"] })
   .addParameters({
     info: {
       disabled: false,
@@ -93,33 +87,8 @@ storiesOf('Kloudi Command Panel', module)
       header: false,
     },
   })
-  .add('popup config', () => (
-    <CommandPalette
-      alwaysRenderCommands
-      /*
-       * - If closeOnSelect is false then when the command is selected a loading
-       *   indicator comes.
-       * - If closeOnSelect is true then when the command is selected then the
-       *   suggestions closes
-       *  In pop we need to control it with code.
-       */
-      commands={suggestions}
-      header={header()}
-      // highlightFirstSuggestion={false}
-      hotKeys={['command+k', 'ctrl+k']}
-      maxDisplayed={100}
-      onSelect={(command) => {
-        alert(`A suggested command was selected: \n
-        ${JSON.stringify(command)}
-        `);
-      }}
-      placeholder='Search'
-      renderCommand={view}
-      // showSpinnerOnSelect={false}
-      theme={kloudi}
-    />
-  ))
-  .add('homepage config', () => (
+  .add("popup config", () => <ModalCommandPanel />)
+  .add("homepage config", () => (
     <CommandPalette
       //Depending on where this is opened we'll have to toggle this
       alwaysRenderCommands={false}
@@ -132,16 +101,16 @@ storiesOf('Kloudi Command Panel', module)
       closeOnSelect={false}
       commands={commands}
       // On home page the setting will be inline else it will be modal
-      display={'inline'}
+      display={"inline"}
       header={sampleHeader()}
       renderCommand={sampleAtomCommand}
       maxDisplayed={6}
       trigger={Trigger()}
-      hotKeys={['command+k', 'ctrl+k']}
+      hotKeys={["command+k", "ctrl+k"]}
       open
     />
   ))
-  .add('onboarding step 1-4 config', () => (
+  .add("onboarding step 1-4 config", () => (
     <CommandPalette
       //Depending on where this is opened we'll have to toggle this
       alwaysRenderCommands={false}
@@ -153,22 +122,22 @@ storiesOf('Kloudi Command Panel', module)
        */
       closeOnSelect={false}
       commands={commands}
-      defaultInputValue={'Show me onboarding tools'}
+      defaultInputValue={"Show me onboarding tools"}
       // On home page the setting will be inline else it will be modal
-      display={'inline'}
+      display={"inline"}
       header={sampleHeader()}
       renderCommand={sampleAtomCommand}
       maxDisplayed={6}
       trigger={Trigger()}
-      hotKeys={['command+k', 'ctrl+k']}
+      hotKeys={["command+k", "ctrl+k"]}
       open
     />
   ));
 
-storiesOf('Command Pallete', module)
+storiesOf("Command Pallete", module)
   .addDecorator(
     withOptions({
-      name: 'Command Palette',
+      name: "Command Palette",
       addonPanelInRight: false,
     })
   )
@@ -178,16 +147,16 @@ storiesOf('Command Pallete', module)
   .addDecorator((story) => (
     <div
       style={{
-        position: 'relative',
-        minHeight: '764px',
-        minWidth: '428px',
+        position: "relative",
+        minHeight: "764px",
+        minWidth: "428px",
       }}
     >
       {story()}
     </div>
   ))
   .addDecorator(withTests({ results }))
-  .addParameters({ jest: ['command-palette.test.js'] })
+  .addParameters({ jest: ["command-palette.test.js"] })
   .addParameters({
     info: {
       disabled: false,
@@ -195,19 +164,19 @@ storiesOf('Command Pallete', module)
       header: false,
     },
   })
-  .add('with everything', () => (
+  .add("with everything", () => (
     <CommandPalette
       commands={commands}
       renderCommand={sampleAtomCommand}
       header={sampleHeader()}
       maxDisplayed={6}
       trigger={Trigger()}
-      hotKeys='shift+/'
+      hotKeys="shift+/"
       open
     />
   ))
-  .add('with a theme', () => {
-    const label = 'theme';
+  .add("with a theme", () => {
+    const label = "theme";
     const options = {
       Chrome: chrome,
       Atom: atom,
@@ -217,7 +186,7 @@ storiesOf('Command Pallete', module)
     const theme = select(label, options, defaultValue);
     return <CommandPalette commands={commands} theme={theme} open />;
   })
-  .add('atom theme', () => (
+  .add("atom theme", () => (
     <CommandPalette
       commands={commands}
       renderCommand={sampleAtomCommand}
@@ -225,7 +194,7 @@ storiesOf('Command Pallete', module)
       open
     />
   ))
-  .add('chrome theme', () => (
+  .add("chrome theme", () => (
     <CommandPalette
       commands={commands}
       renderCommand={sampleChromeCommand}
@@ -234,13 +203,13 @@ storiesOf('Command Pallete', module)
     />
   ))
   .add(
-    'sublime theme',
+    "sublime theme",
     () => (
       <CommandPalette
         commands={commands}
         renderCommand={sampleSublimeCommand}
         theme={sublime}
-        placeholder=''
+        placeholder=""
         maxDisplayed={12}
         open
       />
@@ -248,15 +217,15 @@ storiesOf('Command Pallete', module)
     {
       backgrounds: [
         {
-          name: 'dark',
-          value: 'rgba(39, 40, 34)',
+          name: "dark",
+          value: "rgba(39, 40, 34)",
           default: true,
         },
       ],
     }
   )
   .add(
-    'with a custom command',
+    "with a custom command",
     () => (
       <CommandPalette
         commands={commands}
@@ -270,22 +239,22 @@ storiesOf('Command Pallete', module)
       },
     }
   )
-  .add('is toggled open', () => <CommandPalette commands={commands} open />, {
+  .add("is toggled open", () => <CommandPalette commands={commands} open />, {
     info: {
       text: `Adding an _open_ prop will force the command palette to be displayed
       when it mounts. By default command palette will be hidden until the _trigger_
       is cliked.`,
     },
   })
-  .add('with defaults', () => {
+  .add("with defaults", () => {
     // Knobs Addon for Commands object
-    const commandsInput = object('Commands', commands);
+    const commandsInput = object("Commands", commands);
     return <CommandPalette commands={commandsInput} />;
   })
-  .add('without a modal', () => (
-    <CommandPalette commands={commands} display='inline' />
+  .add("without a modal", () => (
+    <CommandPalette commands={commands} display="inline" />
   ))
-  .add('onSelect', () => (
+  .add("onSelect", () => (
     <CommandPalette
       open
       commands={commands}
@@ -296,7 +265,7 @@ storiesOf('Command Pallete', module)
       }}
     />
   ))
-  .add('onChange', () => (
+  .add("onChange", () => (
     <CommandPalette
       open
       commands={commands}
@@ -311,8 +280,8 @@ storiesOf('Command Pallete', module)
       }}
     />
   ))
-  .add('highlightFirstSuggestion', () => {
-    const label = 'highlightFirstSuggestion';
+  .add("highlightFirstSuggestion", () => {
+    const label = "highlightFirstSuggestion";
     const defaultValue = true;
     const highlight = boolean(label, defaultValue);
     return (
@@ -323,7 +292,7 @@ storiesOf('Command Pallete', module)
       />
     );
   })
-  .add('onHighlight', () => (
+  .add("onHighlight", () => (
     <CommandPalette
       commands={commands}
       onHighlight={(command) => {
@@ -332,25 +301,25 @@ storiesOf('Command Pallete', module)
       open
     />
   ))
-  .add('onAfterOpen', () => (
+  .add("onAfterOpen", () => (
     <CommandPalette
       commands={commands}
       onAfterOpen={() => {
-        alert('The palette was opened.');
+        alert("The palette was opened.");
       }}
     />
   ))
-  .add('onRequestClose', () => (
+  .add("onRequestClose", () => (
     <CommandPalette
       commands={commands}
       onRequestClose={() => {
-        alert('The palette will close.');
+        alert("The palette will close.");
       }}
     />
   ))
   .add(
-    'with a custom trigger',
-    () => <CommandPalette commands={commands} trigger='Click Me!' />,
+    "with a custom trigger",
+    () => <CommandPalette commands={commands} trigger="Click Me!" />,
     {
       info: {
         text: `Use the _trigger_ prop to customize the component that the user
@@ -364,59 +333,59 @@ storiesOf('Command Pallete', module)
       },
     }
   )
-  .add('defaultInputValue', () => (
-    <CommandPalette commands={commands} open defaultInputValue='>' />
+  .add("defaultInputValue", () => (
+    <CommandPalette commands={commands} open defaultInputValue=">" />
   ))
-  .add('alwaysRenderCommands', () => (
+  .add("alwaysRenderCommands", () => (
     <CommandPalette
       commands={commands}
       open
-      alwaysRenderCommands={boolean('alwaysRenderCommands', false)}
+      alwaysRenderCommands={boolean("alwaysRenderCommands", false)}
     />
   ))
-  .add('showSpinnerOnSelect', () => (
+  .add("showSpinnerOnSelect", () => (
     <CommandPalette
       commands={commands}
       open
-      showSpinnerOnSelect={boolean('showSpinnerOnSelect', true)}
+      showSpinnerOnSelect={boolean("showSpinnerOnSelect", true)}
     />
   ))
-  .add('with custom hotkeys', () => (
-    <CommandPalette commands={commands} hotKeys='/' />
+  .add("with custom hotkeys", () => (
+    <CommandPalette commands={commands} hotKeys="/" />
   ))
-  .add('with multiple custom hotkeys', () => (
-    <CommandPalette commands={commands} hotKeys={['/', 'command+k']} />
+  .add("with multiple custom hotkeys", () => (
+    <CommandPalette commands={commands} hotKeys={["/", "command+k"]} />
   ))
-  .add('with custom header', () => (
+  .add("with custom header", () => (
     <CommandPalette commands={commands} header={sampleHeader()} open />
   ))
-  .add('with closeOnSelect', () => (
+  .add("with closeOnSelect", () => (
     <CommandPalette commands={commands} closeOnSelect open />
   ))
-  .add('with resetInputOnClose', () => (
+  .add("with resetInputOnClose", () => (
     <CommandPalette commands={commands} open resetInputOnClose />
   ))
-  .add('with custom placeholder', () => (
+  .add("with custom placeholder", () => (
     <CommandPalette
       commands={commands}
-      placeholder={text('placeholder', 'What do you want?')}
+      placeholder={text("placeholder", "What do you want?")}
       open
     />
   ))
-  .add('with lots of commands', () => (
+  .add("with lots of commands", () => (
     <CommandPalette commands={proccessedCommands} open />
   ))
-  .add('with a custom spinner', () => (
+  .add("with a custom spinner", () => (
     <CommandPalette
       commands={commands}
       spinner={
-        <div style={{ color: 'white', textAlign: 'center' }}>Waiting...</div>
+        <div style={{ color: "white", textAlign: "center" }}>Waiting...</div>
       }
       open
     />
   ))
-  .add('with max displayed', () => {
-    const label = 'maxDisplayed';
+  .add("with max displayed", () => {
+    const label = "maxDisplayed";
     const defaultValue = 3;
     const options = {
       range: true,
@@ -429,17 +398,17 @@ storiesOf('Command Pallete', module)
       <CommandPalette commands={commands} maxDisplayed={maxDisplayed} open />
     );
   })
-  .add('with search options', () => {
+  .add("with search options", () => {
     // Knobs for Search Options Object
     const opts = {
       threshold: -Infinity,
       limit: 100,
       allowTypo: true,
-      key: 'name',
-      keys: ['name'],
+      key: "name",
+      keys: ["name"],
       scoreFn: null,
     };
-    const searchOptionsInput = object('Search Options', opts);
+    const searchOptionsInput = object("Search Options", opts);
     return (
       <CommandPalette
         commands={proccessedCommands}
@@ -449,9 +418,9 @@ storiesOf('Command Pallete', module)
       />
     );
   })
-  .add('with multiple highlights', () => {
+  .add("with multiple highlights", () => {
     const opts = {
-      keys: ['name', 'category'],
+      keys: ["name", "category"],
     };
     return (
       <CommandPalette
@@ -464,11 +433,11 @@ storiesOf('Command Pallete', module)
       />
     );
   })
-  .add('with reactModalParentSelector', () => (
-    <div id='main'>
+  .add("with reactModalParentSelector", () => (
+    <div id="main">
       <CommandPalette
         commands={commands}
-        reactModalParentSelector='#main'
+        reactModalParentSelector="#main"
         open
       />
     </div>
