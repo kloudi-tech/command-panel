@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import CommandPalette from "../../../src/command-palette";
 import ModalCommandPanelHeader from "./header/ModalCommandPanelHeader";
@@ -8,20 +8,20 @@ import QuerySuggestions from "../query-suggestions/QuerySuggestions";
 import "./modal-command-panel.css";
 
 import DEFAULT_SUGGESTIONS from "../../data/default-suggestions";
-export default function ModalCommandPanel() {
+export default function ModalCommandPanel(props) {
+  const [closeOnSelect, setCloseOnSelect] = useState(
+    props.closeOnSelect || false
+  );
+  const [showSpinnerOnSelect, setShowSpinnerOnSelect] = useState(
+    props.closeOnSelect || false
+  );
+
   return (
     <CommandPalette
-      alwaysRenderCommands
-      /*
-       * - If closeOnSelect is false then when the command is selected a loading
-       *   indicator comes.
-       * - If closeOnSelect is true then when the command is selected then the
-       *   suggestions closes
-       *  In pop we need to control it with code.
-       */
       commands={DEFAULT_SUGGESTIONS}
+      closeOnSelect={closeOnSelect}
       header={ModalCommandPanelHeader()}
-      // highlightFirstSuggestion={false}
+      highlightFirstSuggestion
       hotKeys={["command+k", "ctrl+k"]}
       maxDisplayed={100}
       onSelect={(command) => {
@@ -31,7 +31,7 @@ export default function ModalCommandPanel() {
       }}
       placeholder="Search"
       renderCommand={QuerySuggestions}
-      // showSpinnerOnSelect={false}
+      showSpinnerOnSelect={showSpinnerOnSelect}
       theme={ModalCommandPanelTheme}
     />
   );
