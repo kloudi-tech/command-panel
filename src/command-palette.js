@@ -61,7 +61,9 @@ class CommandPalette extends React.Component {
     this.onSelect = this.onSelect.bind(this);
 
     // eslint-disable-next-line prettier/prettier
-    this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
+    this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(
+      this
+    );
     this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(
       this
     );
@@ -212,18 +214,15 @@ class CommandPalette extends React.Component {
     this.commandPaletteInput.input.focus();
     // FIXME: apply "esc" on the modal instead of input
     // so that pressing esc on loading spinner works too
-    const { hotKeys } = this.props;
-    Mousetrap(this.commandPaletteInput.input).bind(
-      ["esc"].concat(hotKeys),
-      () => {
-        this.handleCloseModal();
-        return false;
-      }
-    );
   }
 
   handleCloseModal() {
-    const { resetInputOnClose, defaultInputValue, onRequestClose } = this.props;
+    const {
+      hotKeys,
+      defaultInputValue,
+      onRequestClose,
+      resetInputOnClose,
+    } = this.props;
     const { value } = this.state;
 
     this.setState({
@@ -231,14 +230,30 @@ class CommandPalette extends React.Component {
       isLoading: false,
       value: resetInputOnClose ? defaultInputValue : value,
     });
+    Mousetrap.bind(hotKeys, () => {
+      this.handleOpenModal();
+      return false;
+    });
 
     return onRequestClose();
   }
 
   handleOpenModal() {
+    const { hotKeys } = this.props;
     this.setState({
       showModal: true,
       suggestions: allSuggestions,
+    });
+    Mousetrap(this.commandPaletteInput.input).bind(
+      ["esc"].concat(hotKeys),
+      () => {
+        this.handleCloseModal();
+        return false;
+      }
+    );
+    Mousetrap.bind(["esc"].concat(hotKeys), () => {
+      this.handleCloseModal();
+      return false;
     });
   }
 
