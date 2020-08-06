@@ -38,6 +38,7 @@ import commands from "../src/__mocks__/commands";
 import lotsOfCommands from "../src/__mocks__/lots_of_commands";
 import results from "../.jest-test-results.json";
 import ModalCommandPanel from "../kloudi/components/modal-command-panel/ModalCommandPanel";
+import InlineCommandPanel from "../kloudi/components/inline-command-panel/InlineCommandPanel";
 
 // add noop command to this big list of command names
 function addCommandToArray(c) {
@@ -61,7 +62,7 @@ storiesOf("Kloudi Command Panel", module)
   .addDecorator(
     withOptions({
       name: "Command Palette",
-      addonPanelInRight: false,
+      showPanel: false,
     })
   )
   .addDecorator(withInfo)
@@ -88,28 +89,7 @@ storiesOf("Kloudi Command Panel", module)
     },
   })
   .add("popup config", () => <ModalCommandPanel />)
-  .add("homepage config", () => (
-    <CommandPalette
-      //Depending on where this is opened we'll have to toggle this
-      alwaysRenderCommands={false}
-      /*
-       * - If closeOnSelect is false then when the command is selected a loading
-       *   indicator comes.
-       * - If closeOnSelect is true then when the command is selected then the
-       *   suggestions closes
-       */
-      closeOnSelect={false}
-      commands={commands}
-      // On home page the setting will be inline else it will be modal
-      display={"inline"}
-      header={sampleHeader()}
-      renderCommand={sampleAtomCommand}
-      maxDisplayed={6}
-      trigger={Trigger()}
-      hotKeys={["command+k", "ctrl+k"]}
-      open
-    />
-  ))
+  .add("homepage config", () => <InlineCommandPanel />)
   .add("onboarding step 1-4 config", () => (
     <CommandPalette
       //Depending on where this is opened we'll have to toggle this
