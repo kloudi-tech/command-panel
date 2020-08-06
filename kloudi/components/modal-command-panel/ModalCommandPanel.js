@@ -13,7 +13,7 @@ export default function ModalCommandPanel(props) {
     props.closeOnSelect || false
   );
   const [showSpinnerOnSelect, setShowSpinnerOnSelect] = useState(
-    props.closeOnSelect || false
+    props.showSpinnerOnSelect || false
   );
 
   return (

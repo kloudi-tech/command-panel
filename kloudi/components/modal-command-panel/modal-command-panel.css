@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
 
-.kloudi-overlay {
+.kloudi-modal-overlay {
   position: fixed;
   top: 0px;
   left: 0px;
@@ -17,7 +17,7 @@
   }
 }
 
-@media only screen and (min-width: 64px) {
+@media only screen and (min-width: 640px) {
   .kloudi-modal {
     width: 640px;
   }
@@ -32,36 +32,34 @@
 
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 8px;
-  border: solid 1px #e4e5ec;
+  border-bottom: solid 1px #e4e5ec;
   box-shadow: 2px 2px 8px 4px rgba(69, 73, 91, 0.25);
 
   overflow: hidden;
   outline: none;
   padding: 0px 0px 0px 0px;
   transform: translate(-50%);
-  -webkit-backdrop-filter: blur(2px);
-  backdrop-filter: blur(2px);
 }
 
-.kloudi-header {
+.kloudi-modal-header {
 }
 
-.kloudi-content {
+.kloudi-modal-content {
 }
 
-.kloudi-container {
+.kloudi-modal-container {
   font-family: "Nunito Sans", -apple-system, system-ui, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   font-weight: 400;
   font-size: 16px;
 }
 
-.kloudi-containerOpen {
+.kloudi-modal-containerOpen {
 }
 
-.kloudi-input {
+.kloudi-modal-input {
   width: calc(100% - 40px);
-  height: 59px;
+  height: 58px;
   padding: 0px 16px 0px 24px;
   outline: none;
 
@@ -81,45 +79,45 @@
   caret-color: black;
 }
 
-.kloudi-input::-moz-placeholder {
+.kloudi-modal-input::-moz-placeholder {
   color: #9b9b9b;
   font-family: "Nunito Sans";
   font-weight: normal;
   padding-right: 2px;
 }
 
-.kloudi-input::placeholder {
+.kloudi-modal-input::placeholder {
   color: #9b9b9b;
   font-family: "Nunito Sans";
   font-weight: normal;
   padding-right: 2px;
 }
 
-.kloudi-input::-ms-input-placeholder {
+.kloudi-modal-input::-ms-input-placeholder {
   color: #9b9b9b;
   font-family: "Nunito Sans";
   font-weight: normal;
   padding-right: 2px;
 }
 
-.kloudi-inputOpen {
+.kloudi-modal-inputOpen {
 }
 
-.kloudi-inputFocused {
+.kloudi-modal-inputFocused {
 }
 
-.kloudi-suggestionsContainerOpen {
+.kloudi-modal-suggestionsContainerOpen {
   overflow: scroll;
   max-height: 270px;
 }
 
-.kloudi-suggestionsList {
+.kloudi-modal-suggestionsList {
   list-style: none;
   padding: 0px 0px 16px 0px;
   margin: 0px 0px;
 }
 
-.kloudi-suggestion {
+.kloudi-modal-suggestion {
   color: #9b9b9b;
   border-top: 0px none;
   padding: 16px 16px;
@@ -127,31 +125,31 @@
   border-left: solid 2px #fff;
 }
 
-.kloudi-suggestionFirst {
+.kloudi-modal-suggestionFirst {
 }
 
-.kloudi-suggestionHighlighted {
+.kloudi-modal-suggestionHighlighted {
   color: #000000;
   background-color: #f7f7f7;
   border-left: solid 2px #f06723;
 }
 
-.kloudi-suggestionHighlighted .kloudi-query-item svg {
+.kloudi-modal-suggestionHighlighted .kloudi-modal-query-item svg {
   stroke: black;
 }
 
-.kloudi-suggestionHighlighted .kloudi-query-shortcut kbd {
+.kloudi-modal-suggestionHighlighted .kloudi-modal-query-shortcut kbd {
   color: black;
   background-color: rgba(61, 61, 61, 0.25);
 }
 
-.kloudi-spinner {
+.kloudi-modal-spinner {
   border-top: 0.4em solid rgba(240, 103, 35, 0.2);
   border-right: 0.4em solid rgba(240, 103, 35, 0.2);
   border-bottom: 0.4em solid rgba(240, 103, 35, 0.2);
   border-left: 0.4em solid#f06723;
 }
 
-.kloudi-trigger {
+.kloudi-modal-trigger {
   display: none;
 }

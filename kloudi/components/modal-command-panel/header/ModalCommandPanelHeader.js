@@ -6,9 +6,9 @@ import "./modal-command-panel-header.css";
 
 export default function ModalCommandPanelHeader() {
   return (
-    <div className={`wrapper`}>
-      <object className="logo" type="image/svg+xml" data={logo} />
-      <span className="item">{`Command Panel`}</span>
+    <div className={`header-wrapper`}>
+      <object className="header-logo" type="image/svg+xml" data={logo} />
+      <span className="header-item">{`Command Panel`}</span>
     </div>
   );
 }
