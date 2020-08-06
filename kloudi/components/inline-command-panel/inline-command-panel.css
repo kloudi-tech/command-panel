@@ -78,7 +78,7 @@
 }
 
 .kloudi-inline-suggestionsContainer {
-  margin: 24px 0 0 0;
+  margin: 32px 0 0 0;
 }
 
 .kloudi-inline-suggestionsContainerOpen {
@@ -92,7 +92,7 @@
   flex-direction: row;
   list-style-type: none;
   padding: 8px 0px;
-  margin: 0px 16px;
+  margin: 16px;
   white-space: nowrap;
 }
 
