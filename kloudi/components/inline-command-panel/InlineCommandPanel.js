@@ -21,7 +21,6 @@ export default function InlineCommandPanel(props) {
       commands={DEFAULT_SUGGESTIONS}
       closeOnSelect={closeOnSelect}
       display={"inline"}
-      suggestionsContainer={InlineCommandPanelSuggestionsContainer}
       highlightFirstSuggestion
       hotKeys={["command+k", "ctrl+k"]}
       maxDisplayed={100}
@@ -32,6 +31,7 @@ export default function InlineCommandPanel(props) {
       }}
       placeholder="Search"
       renderCommand={InlineQuerySuggestions}
+      renderSuggestionsContainer={InlineCommandPanelSuggestionsContainer}
       showSpinnerOnSelect={showSpinnerOnSelect}
       theme={InlineCommandPanelTheme}
     />
