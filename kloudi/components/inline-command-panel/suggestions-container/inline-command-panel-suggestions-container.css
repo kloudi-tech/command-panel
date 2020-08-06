@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
+
+.suggestions-container-wrapper {
+  color: #4a4a4a;
+  display: flex;
+  flex-direction: row;
+  font-family: "Nunito Sans", -apple-system, system-ui, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 16px 0px;
+  margin: 0px 16px;
+  text-transform: uppercase;
+}
+
+.suggestions-container-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0px 16px;
+}
+
+.suggestions-container-item {
+  font-size: 20px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #4a4a4a;
+  border-bottom: solid 1px #e4e5ec;
+}
+
+.suggestions-container-logo {
+  margin: auto 8px auto 0;
+  width: 30px;
+  height: 30px;
+  border: solid 1px #f06723;
+  border-radius: 50%;
+}

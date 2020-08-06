@@ -1,0 +1,138 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
+
+@media only screen and (min-width: 0px) {
+  .kloudi-inline-container {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .kloudi-inline-container {
+    width: 720px;
+  }
+}
+
+.kloudi-inline-container {
+  font-family: "Nunito Sans", -apple-system, system-ui, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  margin: 0 auto;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  padding: 16px 0px;
+}
+
+.kloudi-inline-input {
+  width: calc(720px - 72px);
+  height: 58px;
+  padding: 0px 16px 0px 24px;
+  margin: 0px 16px;
+  outline: none;
+
+  font-size: 20px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #4a4a4a;
+  font-family: "Nunito Sans", -apple-system, system-ui, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+
+  border: solid 1px #e4e5ec;
+  border-radius: 8px;
+  background-color: white;
+  caret-color: black;
+  box-shadow: 0 4px 8px 0 rgba(69, 73, 91, 0.5);
+  transition: all 100ms ease-in-out;
+}
+
+.kloudi-inline-input::-moz-placeholder {
+  border-bottom: solid 1px #e4e5ec;
+  color: #9b9b9b;
+  font-family: "Nunito Sans";
+  font-weight: normal;
+  padding-right: 2px;
+}
+
+.kloudi-inline-input::placeholder {
+  border-bottom: solid 1px #e4e5ec;
+  color: #9b9b9b;
+  font-family: "Nunito Sans";
+  font-weight: normal;
+  padding-right: 2px;
+}
+
+.kloudi-inline-input::-ms-input-placeholder {
+  border-bottom: solid 1px #e4e5ec;
+  color: #9b9b9b;
+  font-family: "Nunito Sans";
+  font-weight: normal;
+  padding-right: 2px;
+}
+
+.kloudi-inline-inputFocused {
+  box-shadow: 0 1px 2px 0 rgba(69, 73, 91, 0.5);
+  transition: all 100ms ease-in-out;
+}
+
+.kloudi-inline-suggestionsContainer {
+  margin: 24px 0 0 0;
+}
+
+.kloudi-inline-suggestionsContainerOpen {
+  overflow: scroll;
+  max-height: 270px;
+}
+
+.kloudi-inline-suggestionsList {
+  float: left;
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  padding: 8px 0px;
+  margin: 0px 16px;
+  white-space: nowrap;
+}
+
+.kloudi-inline-suggestion {
+  border-radius: 8px;
+  border: solid 1px #e4e5ec;
+  color: #4a4a4a;
+  cursor: pointer;
+  margin: auto 16px auto 0px;
+  padding: 8px 16px;
+
+  box-shadow: 0 2px 4px 0 rgba(69, 73, 91, 0.25);
+  transition: all 100ms ease-in-out;
+}
+
+.kloudi-inline-suggestionHighlighted {
+  color: #000000;
+  border: solid 1px #cdced4;
+  background-color: #f9f9fb;
+
+  box-shadow: 0 1px 2px 0 rgba(69, 73, 91, 0.5);
+  transition: all 100ms ease-in-out;
+}
+
+.kloudi-inline-suggestionHighlighted .kloudi-inline-query-item svg {
+  stroke: black;
+}
+
+.kloudi-inline-suggestionHighlighted .kloudi-inline-query-shortcut kbd {
+  color: black;
+  background-color: rgba(61, 61, 61, 0.25);
+}
+
+.kloudi-inline-spinner {
+  border-top: 0.4em solid rgba(240, 103, 35, 0.2);
+  border-right: 0.4em solid rgba(240, 103, 35, 0.2);
+  border-bottom: 0.4em solid rgba(240, 103, 35, 0.2);
+  border-left: 0.4em solid#f06723;
+}
+
+.kloudi-inline-trigger {
+  display: none;
+}
