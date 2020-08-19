@@ -60,7 +60,7 @@
 .kloudi-modal-input {
   width: calc(100% - 40px);
   height: 58px;
-  padding: 0px 16px 0px 24px;
+  padding: 0px 16px;
   outline: none;
 
   font-size: 20px;
@@ -74,7 +74,6 @@
     "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 
   border: none;
-  border-bottom: solid 1px #e4e5ec;
   border-radius: 0px;
   caret-color: black;
 }
@@ -152,4 +151,18 @@
 
 .kloudi-modal-trigger {
   display: none;
+}
+
+.kloudi-modal-input-logo {
+  width: 24px;
+  height: 24px;
+  margin: auto 0px auto 24px;
+  content: url("../../images/search.svg");
+}
+
+.kloudi-modal-input-wrapper {
+  display: flex;
+  flex-direction: row;
+  border: none;
+  border-bottom: solid 1px #e4e5ec;
 }

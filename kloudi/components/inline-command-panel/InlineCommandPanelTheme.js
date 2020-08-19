@@ -16,4 +16,7 @@ export default {
   suggestionFirst: "kloudi-inline-suggestionFirst",
   suggestionHighlighted: "kloudi-inline-suggestionHighlighted",
   trigger: "kloudi-inline-trigger",
+  commandPanelInputLogo: "kloudi-inline-input-logo",
+  commandPanelInputWrapper: "kloudi-inline-input-wrapper",
+  commandPanelInputWrapperFocused: "kloudi-inline-input-wrapper-focused",
 };

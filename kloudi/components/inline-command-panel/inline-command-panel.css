@@ -26,8 +26,8 @@
 .kloudi-inline-input {
   width: calc(720px - 72px);
   height: 58px;
-  padding: 0px 16px 0px 24px;
-  margin: 0px 16px;
+  padding: 0px 16px 0px 16px;
+  margin: 0px 0px;
   outline: none;
 
   font-size: 20px;
@@ -40,12 +40,9 @@
   font-family: "Nunito Sans", -apple-system, system-ui, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 
-  border: solid 1px #e4e5ec;
+  border: none;
   border-radius: 8px;
-  background-color: white;
   caret-color: black;
-  box-shadow: 0 4px 8px 0 rgba(69, 73, 91, 0.5);
-  transition: all 100ms ease-in-out;
 }
 
 .kloudi-inline-input::-moz-placeholder {
@@ -70,11 +67,6 @@
   font-family: "Nunito Sans";
   font-weight: normal;
   padding-right: 2px;
-}
-
-.kloudi-inline-inputFocused {
-  box-shadow: 0 1px 2px 0 rgba(69, 73, 91, 0.5);
-  transition: all 100ms ease-in-out;
 }
 
 .kloudi-inline-suggestionsContainer {
@@ -104,16 +96,7 @@
   margin: auto 16px auto 0px;
   padding: 8px 16px;
 
-  box-shadow: 0 2px 4px 0 rgba(69, 73, 91, 0.25);
-  transition: all 100ms ease-in-out;
-}
-
-.kloudi-inline-suggestionHighlighted {
-  color: #000000;
-  border: solid 1px #cdced4;
-  background-color: #f9f9fb;
-
-  box-shadow: 0 1px 2px 0 rgba(69, 73, 91, 0.5);
+  box-shadow: 0 2px 4px 0 rgba(69, 73, 91, 0.5);
   transition: all 100ms ease-in-out;
 }
 
@@ -135,4 +118,26 @@
 
 .kloudi-inline-trigger {
   display: none;
+}
+
+.kloudi-inline-input-logo {
+  width: 24px;
+  height: 24px;
+  margin: auto 0px auto 16px;
+  content: url("../../images/search.svg");
+}
+
+.kloudi-inline-input-wrapper {
+  display: flex;
+  flex-direction: row;
+  border: solid 1px #e4e5ec;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(69, 73, 91, 0.5);
+  transition: all 100ms ease-in-out;
+}
+
+.kloudi-inline-input-wrapper-focused {
+  box-shadow: 0 1px 2px 0 rgba(69, 73, 91, 0.5);
+  transition: all 100ms ease-in-out;
 }

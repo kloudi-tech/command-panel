@@ -130,7 +130,7 @@
     "fast-deep-equal": "^3.1.3",
     "fuzzysort": "^1.1.4",
     "mousetrap": "kloudi-tech/mousetrap#master",
-    "react-autosuggest": "^10.0.2",
+    "react-autosuggest": "kloudi-tech/react-autosuggest#master",
     "react-modal": "^3.11.2"
   },
   "files": [

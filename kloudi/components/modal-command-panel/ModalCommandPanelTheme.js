@@ -16,4 +16,7 @@ export default {
   suggestionFirst: "kloudi-modal-suggestionFirst",
   suggestionHighlighted: "kloudi-modal-suggestionHighlighted",
   trigger: "kloudi-modal-trigger",
+  commandPanelInputLogo: "kloudi-modal-input-logo",
+  commandPanelInputWrapper: "kloudi-modal-input-wrapper",
+  commandPanelInputWrapperFocused: "kloudi-modal-input-wrapper-focussed",
 };
