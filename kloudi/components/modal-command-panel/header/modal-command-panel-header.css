@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
 
 .header-wrapper {
-  color: #4a4a4a;
+  color: black;
   display: flex;
   flex-direction: row;
   font-family: "Nunito Sans", -apple-system, system-ui, BlinkMacSystemFont,
@@ -10,7 +10,6 @@
   font-weight: 600;
   padding: 16px 0px;
   margin: 0px 16px;
-  text-transform: uppercase;
 }
 
 .header-item {
@@ -18,7 +17,16 @@
 }
 
 .header-logo {
-  margin: auto 4px auto 0px;
+  margin: auto 8px auto auto;
   width: 40px;
   height: 40px;
+}
+
+.header-mode {
+  border-radius: 8px;
+  background-color: #f7f7f7;
+  font-family: "Nunito Sans", -apple-system, system-ui, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  padding: 4px 8px;
+  color: #555;
 }

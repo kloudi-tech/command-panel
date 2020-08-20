@@ -43,7 +43,7 @@ class CommandPalette extends React.Component {
   constructor(props) {
     super(props);
 
-    const { defaultInputValue } = this.props;
+    const { defaultInputValue, mode } = this.props;
 
     // Autosuggest is a controlled component.
     // This means that you need to provide an input value
@@ -55,6 +55,7 @@ class CommandPalette extends React.Component {
       showModal: false,
       value: defaultInputValue,
       suggestions: allSuggestions,
+      mode: mode,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -91,8 +92,8 @@ class CommandPalette extends React.Component {
     });
 
     // Use hot key to open command palette
-    Mousetrap.bind(hotKeys, () => {
-      this.handleOpenModal();
+    Mousetrap.bind(hotKeys, (event, combo) => {
+      this.handleOpenModal(combo);
       // prevent default which opens Chrome dev tools command palatte
       return false;
     });
@@ -104,13 +105,18 @@ class CommandPalette extends React.Component {
     return true;
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     const { commands } = this.props;
+
     if (!equal(prevProps.commands, commands)) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
         suggestions: this.fetchData(),
       });
+    }
+    if (!equal(prevState.mode, this.state.mode)) {
+      const { onCommandPanelModeChanged } = this.props;
+      onCommandPanelModeChanged(this.state.mode);
     }
   }
 
@@ -232,16 +238,36 @@ class CommandPalette extends React.Component {
       showModal: false,
       isLoading: false,
       value: resetInputOnClose ? defaultInputValue : value,
+      mode: "SEARCH", // When we close we undo the mode in which the Command Panel was started
     });
 
     return onRequestClose();
   }
 
-  handleOpenModal() {
+  handleOpenModal(combo) {
+    const mode = this.getCommandPanelMode(combo);
     this.setState({
       showModal: true,
       suggestions: allSuggestions,
+      mode: mode,
     });
+  }
+
+  getCommandPanelMode(combo) {
+    if (!combo) return "SEARCH";
+    else {
+      switch (combo) {
+        case "command+alt+k":
+        case "control+alt+k":
+          return "QUICK_SEARCH";
+
+        case "command+alt+g":
+        case "control+alt+g":
+          return "GIT";
+        default:
+          return "SEARCH";
+      }
+    }
   }
 
   // Autosuggest will pass through all these props to the input element.
@@ -386,6 +412,7 @@ CommandPalette.defaultProps = {
   shouldReturnFocusAfterClose: true,
   showSpinnerOnSelect: true,
   theme: defaultTheme,
+  mode: "SEARCH",
 };
 
 CommandPalette.propTypes = {
@@ -473,7 +500,11 @@ CommandPalette.propTypes = {
    * the usage of the command palette. The component is displayed at the top of the
    * command palette. header are not displayed by default. see: examples
    * sampleInstruction.js for reference */
-  header: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  header: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
 
   /** trigger a string or a React.ComponentType that opens the command palette when
    * clicked. If a custom trigger is not set, then by default a button will be used. If a
@@ -522,6 +553,11 @@ CommandPalette.propTypes = {
   /** Styles and object that contains a list of key value pairs where the keys map the
    * command palette components to their CSS class names. */
   theme: PropTypes.object,
+
+  /** mode one of "SEARCH" or "QUICK_SEARCH" or "GIT", when set to any of the
+   * mode the command palette is in the mode set by this prop. Defaults to
+   * "SEARCH". */
+  mode: PropTypes.oneOf(["SEARCH", "QUICK_SEARCH", "GIT"]),
 };
 
 export default CommandPalette;

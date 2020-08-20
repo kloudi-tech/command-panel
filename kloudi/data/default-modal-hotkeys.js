@@ -1,0 +1,8 @@
+export default [
+  "command+k",
+  "ctrl+k",
+  "command+alt+k",
+  "control+alt+k",
+  "command+alt+g",
+  "control+alt+g",
+];

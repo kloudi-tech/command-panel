@@ -18,7 +18,7 @@ const DefaultTriggerComponent = (props) => {
     <button className={theme} onClick={onClick} type="button">
       Command Palette &nbsp;
       <kbd className="ui mini horizontal grey label">
-        <span style={visualyHidden}> Keyboard Shortcut </span>⇧⌘P
+        <span style={visualyHidden}> Keyboard Shortcut </span>⌘K
       </kbd>
     </button>
   );
