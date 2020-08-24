@@ -13,14 +13,13 @@ import fuzzysortOptions from "../src/fuzzysort-options";
 import PaletteSpinner from "../src/palette-spinner";
 import RenderCommand from "../src/render-command";
 import PaletteTrigger from "../src/palette-trigger";
-import getSuggestions from "../src/suggestions";
+import getSuggestions from "./suggestions";
 import getTextForKeyCombinations from "./quick-search";
 import defaultTheme from "./components/modal-command-panel/ModalCommandPanelTheme";
 import { noop, override, after } from "../src/utils";
 
 import "./components/modal-command-panel/modal-command-panel.css";
 
-const QUICK_SEARCH_HOTKEYS = require("../kloudi/data/default-quick-search-hotkeys.json");
 const allSuggestions = [];
 
 // When suggestion is clicked, Autosuggest needs to populate the input element
@@ -229,13 +228,25 @@ class CommandPalette extends React.Component {
       ["esc"].concat(hotKeys),
       (event, combo) => {
         if (mode === "QUICK_SEARCH") {
-          if (["esc", "command+alt+k", "control+alt+k"].indexOf(combo) >= 0)
+          const text = getTextForKeyCombinations(combo);
+          if (
+            ["esc", "command+alt+k", "control+alt+k"].indexOf(combo) >= 0 &&
+            this.state.value.length <= 0
+          ) {
             this.handleCloseModal();
-          else {
-            const text = getTextForKeyCombinations(combo);
+          } else {
             this.setState({ value: text });
+            this.onSuggestionsFetchRequested({ value: text });
           }
-        } else this.handleCloseModal();
+        } else {
+          if (
+            ["esc"].concat(hotKeys).indexOf(combo) >= 0 &&
+            this.state.value.length > 0
+          ) {
+            this.setState({ value: "" });
+            this.onSuggestionsFetchRequested({ value: "" });
+          } else this.handleCloseModal();
+        }
         return false;
       }
     );
