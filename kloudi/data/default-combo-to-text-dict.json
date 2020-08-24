@@ -1,0 +1,22 @@
+[
+  {
+    "key": "M",
+    "value": "Mark as "
+  },
+  {
+    "key": "m d",
+    "value": "Mark as Done"
+  },
+  {
+    "key": "m D",
+    "value": "Mark as Done"
+  },
+  {
+    "key": "m r",
+    "value": "Mark as Released"
+  },
+  {
+    "key": "m R",
+    "value": "Mark as Released"
+  }
+]

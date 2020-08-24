@@ -7,7 +7,13 @@ export default [
   },
   {
     id: 2,
-    name: "Reopen",
+    name: "View breadcrumbs",
+    mode: "SEARCH",
+    command() {},
+  },
+  {
+    id: 2,
+    name: "Assign to",
     mode: "SEARCH",
     command() {},
   },
@@ -15,6 +21,20 @@ export default [
     id: 3,
     name: "Mark as released",
     mode: "SEARCH",
+    command() {},
+  },
+  {
+    id: 4,
+    name: "Mark as Done",
+    mode: "QUICK_SEARCH",
+    shortcut: ["M", "D"],
+    command() {},
+  },
+  {
+    id: 4,
+    name: "Mark as Released",
+    mode: "QUICK_SEARCH",
+    shortcut: ["M", "R"],
     command() {},
   },
   {
