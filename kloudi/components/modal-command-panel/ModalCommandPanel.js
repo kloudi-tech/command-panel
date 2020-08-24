@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import CommandPalette from "../../../src/command-palette";
+import CommandPalette from "../../command-pallete";
 import ModalCommandPanelHeader from "./header/ModalCommandPanelHeader";
 import ModalCommandPanelTheme from "./ModalCommandPanelTheme";
 import QuerySuggestions from "../query-suggestions/QuerySuggestions";
@@ -8,7 +8,8 @@ import QuerySuggestions from "../query-suggestions/QuerySuggestions";
 import "./modal-command-panel.css";
 
 import DEFAULT_SUGGESTIONS from "../../data/default-suggestions";
-import DEFAULT_HOTKEYS from "../../data/default-modal-hotkeys";
+import DEFAULT_HOTKEYS from "../../data/default-modal-hotkeys.json";
+import DEFAULT_QUICK_SEARCH_HOTKEYS from "../../data/default-quick-search-hotkeys.json";
 
 export default function ModalCommandPanel(props) {
   const [commands, setCommands] = useState(
@@ -17,22 +18,22 @@ export default function ModalCommandPanel(props) {
   const [closeOnSelect, setCloseOnSelect] = useState(
     props.closeOnSelect || false
   );
+  const [hotkeys, setHotkeys] = useState(DEFAULT_HOTKEYS);
   const [mode, setMode] = useState("SEARCH");
   const [showSpinnerOnSelect, setShowSpinnerOnSelect] = useState(
     props.showSpinnerOnSelect || false
   );
 
   const handleCommandPanelModeChaned = (mode, prevMode) => {
-    if (prevMode !== "SEARCH" && mode === "SEARCH") return;
-    else
-      setCommands(
-        DEFAULT_SUGGESTIONS.filter((item) => {
-          if (!mode) return item;
-          else if (item.mode === mode) return item;
-        })
-      );
-
     setMode(mode);
+    setCommands(
+      DEFAULT_SUGGESTIONS.filter((item) => {
+        if (!mode) return item;
+        else if (item.mode === mode) return item;
+      })
+    );
+    if (mode === "QUICK_SEARCH") setHotkeys(DEFAULT_QUICK_SEARCH_HOTKEYS);
+    else setHotkeys(DEFAULT_HOTKEYS);
   };
 
   return (
@@ -41,7 +42,7 @@ export default function ModalCommandPanel(props) {
       closeOnSelect={closeOnSelect}
       header={ModalCommandPanelHeader(mode)}
       highlightFirstSuggestion
-      hotKeys={DEFAULT_HOTKEYS}
+      hotKeys={hotkeys}
       maxDisplayed={100}
       mode={mode}
       onCommandPanelModeChanged={handleCommandPanelModeChaned}
@@ -52,6 +53,7 @@ export default function ModalCommandPanel(props) {
       }}
       placeholder="Type your query"
       renderCommand={QuerySuggestions}
+      resetInputOnClose
       showSpinnerOnSelect={showSpinnerOnSelect}
       theme={ModalCommandPanelTheme}
     />
