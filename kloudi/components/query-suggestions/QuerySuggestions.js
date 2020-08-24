@@ -27,9 +27,8 @@ function renderShortcuts(shortcut) {
     }
   }
 }
-
 export default function QuerySuggestions(suggestion) {
-  const { name, icon, shortcut } = suggestion;
+  const { name, highlight, icon, shortcut } = suggestion;
   return (
     <div className="kloudi-query-item">
       {icon ? (
@@ -50,7 +49,7 @@ export default function QuerySuggestions(suggestion) {
       )}
       <span
         className="kloudi-query-text"
-        dangerouslySetInnerHTML={{ __html: name }}
+        dangerouslySetInnerHTML={{ __html: highlight || name }}
       />
       {renderShortcuts(shortcut)}
     </div>

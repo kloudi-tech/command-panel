@@ -39,6 +39,10 @@
   text-overflow: ellipsis;
 }
 
+.kloudi-query-text b {
+  color: black;
+}
+
 .search {
   margin: auto 4px;
   width: 16px;
