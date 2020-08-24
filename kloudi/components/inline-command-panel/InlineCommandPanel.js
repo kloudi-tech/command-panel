@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import CommandPalette from "../../../src/command-palette";
+import CommandPalette from "../../command-pallete";
 import InlineCommandPanelSuggestionsContainer from "./suggestions-container/InlineCommandPanelSuggestionsContainer";
 import InlineCommandPanelTheme from "./InlineCommandPanelTheme";
 import InlineQuerySuggestions from "../inline-query-suggestions/InlineQuerySuggestions";
