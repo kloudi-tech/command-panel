@@ -49,9 +49,16 @@ const getSuggestions = function (value, allCommands, options) {
 
   // if the user didnt suggest a specific term or there's a search term
   // but no matches were found return all the commands
-  if (!value || !suggestionResults.length) {
-    return allCommands;
-  }
+  if (value.length > 0 && suggestionResults.length <= 0)
+    return [
+      {
+        id: 1,
+        mode: "INPUT_SEARCH",
+        name: value,
+        command() {},
+      },
+    ];
+  else if (!value || !suggestionResults.length) return allCommands;
 
   // Otherwise return the search results
   return formatSuggestions(suggestionResults, value);
