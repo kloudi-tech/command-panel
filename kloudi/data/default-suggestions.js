@@ -80,7 +80,7 @@ export default [
     command() {},
   },
   {
-    id: 11,
+    id: 12,
     name: "Create a new comment",
     mode: "GIT",
     command() {},

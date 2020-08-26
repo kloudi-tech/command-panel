@@ -131,7 +131,13 @@ class CommandPalette extends React.Component {
 
   onSelect(suggestion = null) {
     const { onSelect } = this.props;
-    return onSelect(suggestion);
+    if (suggestion && suggestion.mode === "MODE") {
+      const mode = suggestion.name
+        .split(" Mode")[0]
+        .replace(" ", "_")
+        .toUpperCase();
+      this.setState({ mode: mode, value: "" });
+    } else return onSelect(suggestion);
   }
 
   onSuggestionHighlighted({ suggestion }) {
@@ -224,43 +230,48 @@ class CommandPalette extends React.Component {
     const { hotKeys } = this.props;
     const { mode } = this.state;
 
-    Mousetrap(this.commandPaletteInput.input).bind(
-      ["esc"].concat(hotKeys),
-      (event, combo) => {
-        if (["QUICK_SEARCH", "GIT"].indexOf(mode) >= 0) {
-          let key = "",
+    if (["QUICK_SEARCH", "GIT"].indexOf(mode) >= 0) {
+      Mousetrap(this.commandPaletteInput.input).bind(
+        ["esc"].concat(hotKeys),
+        (event, combo) => {
+          let keys = "",
             text = "";
           if (mode === "GIT") {
-            key = "g";
+            keys = ["esc", "command+alt+g", "control+alt+g"];
             text = Git.getTextForKeyCombinations(combo);
           } else if (mode === "QUICK_SEARCH") {
-            key = "k";
+            keys = ["esc", "command+alt+k", "control+alt+k"];
             text = QuickSearch.getTextForKeyCombinations(combo);
-          } else key = "";
-
-          if (
-            ["esc", `command+alt+k${key}`, `control+alt+${key}`].indexOf(
-              combo
-            ) >= 0 &&
-            this.state.value.length <= 0
-          ) {
+          } else keys = ["esc"];
+          if (keys.indexOf(combo) >= 0 && this.state.value.length <= 0) {
             this.handleCloseModal();
           } else {
             this.setState({ value: text });
             this.onSuggestionsFetchRequested({ value: text });
           }
-        } else {
+          return false;
+        }
+      );
+    } else {
+      Mousetrap(this.commandPaletteInput.input).bind(
+        ["esc"].concat(hotKeys),
+        (event, combo) => {
           if (
-            ["esc"].concat(hotKeys).indexOf(combo) >= 0 &&
+            ["esc", "command+k", "control+k"].indexOf(combo) >= 0 &&
             this.state.value.length > 0
           ) {
             this.setState({ value: "" });
             this.onSuggestionsFetchRequested({ value: "" });
-          } else this.handleCloseModal();
+          } else if (["command+alt+k", "control+alt+k"].indexOf(combo) >= 0) {
+            this.setState({ value: "", mode: "QUICK_SEARCH" });
+            this.focusInput();
+          } else if (["command+alt+g", "control+alt+g"].indexOf(combo) >= 0)
+            this.setState({ value: "", mode: "GIT" });
+          else this.handleCloseModal();
+          return false;
         }
-        return false;
-      }
-    );
+      );
+    }
   }
 
   handleCloseModal() {
