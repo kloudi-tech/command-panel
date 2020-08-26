@@ -7,9 +7,10 @@ import QuerySuggestions from "../query-suggestions/QuerySuggestions";
 
 import "./modal-command-panel.css";
 
-import DEFAULT_SUGGESTIONS from "../../data/default-suggestions";
-import DEFAULT_HOTKEYS from "../../data/default-modal-hotkeys.json";
-import DEFAULT_QUICK_SEARCH_HOTKEYS from "../../data/default-quick-search-hotkeys.json";
+import DEFAULT_SUGGESTIONS from "../../data/modal/default-suggestions";
+import DEFAULT_HOTKEYS from "../../data/modal/default-hotkeys.json";
+import DEFAULT_GIT_MODE_HOTKEYS from "../../data/modal/modes/git/default-hotkeys.json";
+import DEFAULT_QUICK_SEARCH_HOTKEYS from "../../data/modal/modes/quick-search/default-hotkeys.json";
 
 export default function ModalCommandPanel(props) {
   const [commands, setCommands] = useState(
@@ -33,6 +34,7 @@ export default function ModalCommandPanel(props) {
       })
     );
     if (mode === "QUICK_SEARCH") setHotkeys(DEFAULT_QUICK_SEARCH_HOTKEYS);
+    else if (mode === "GIT") setHotkeys(DEFAULT_GIT_MODE_HOTKEYS);
     else setHotkeys(DEFAULT_HOTKEYS);
   };
 

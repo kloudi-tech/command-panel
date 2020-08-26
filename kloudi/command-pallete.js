@@ -14,7 +14,7 @@ import PaletteSpinner from "../src/palette-spinner";
 import RenderCommand from "../src/render-command";
 import PaletteTrigger from "../src/palette-trigger";
 import getSuggestions from "./suggestions";
-import getTextForKeyCombinations from "./quick-search";
+import { QuickSearch, Git } from "./modes";
 import defaultTheme from "./components/modal-command-panel/ModalCommandPanelTheme";
 import { noop, override, after } from "../src/utils";
 
@@ -227,10 +227,21 @@ class CommandPalette extends React.Component {
     Mousetrap(this.commandPaletteInput.input).bind(
       ["esc"].concat(hotKeys),
       (event, combo) => {
-        if (mode === "QUICK_SEARCH") {
-          const text = getTextForKeyCombinations(combo);
+        if (["QUICK_SEARCH", "GIT"].indexOf(mode) >= 0) {
+          let key = "",
+            text = "";
+          if (mode === "GIT") {
+            key = "g";
+            text = Git.getTextForKeyCombinations(combo);
+          } else if (mode === "QUICK_SEARCH") {
+            key = "k";
+            text = QuickSearch.getTextForKeyCombinations(combo);
+          } else key = "";
+
           if (
-            ["esc", "command+alt+k", "control+alt+k"].indexOf(combo) >= 0 &&
+            ["esc", `command+alt+k${key}`, `control+alt+${key}`].indexOf(
+              combo
+            ) >= 0 &&
             this.state.value.length <= 0
           ) {
             this.handleCloseModal();
