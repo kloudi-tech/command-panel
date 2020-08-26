@@ -85,4 +85,18 @@ export default [
     mode: "GIT",
     command() {},
   },
+  {
+    id: 12,
+    name: "Quick Search Mode",
+    mode: "MODE",
+    shortcut: ["command", "shift", "k"],
+    command() {},
+  },
+  {
+    id: 13,
+    name: "Git Mode",
+    mode: "MODE",
+    shortcut: ["command", "shift", "g"],
+    command() {},
+  },
 ];

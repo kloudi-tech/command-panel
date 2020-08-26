@@ -14,7 +14,9 @@ import DEFAULT_QUICK_SEARCH_HOTKEYS from "../../data/modal/modes/quick-search/de
 
 export default function ModalCommandPanel(props) {
   const [commands, setCommands] = useState(
-    DEFAULT_SUGGESTIONS.filter((item) => item.mode === "SEARCH")
+    DEFAULT_SUGGESTIONS.filter(
+      (item) => ["SEARCH", "MODE"].indexOf(item.mode) >= 0
+    )
   );
   const [closeOnSelect, setCloseOnSelect] = useState(
     props.closeOnSelect || false
