@@ -243,8 +243,12 @@ class CommandPalette extends React.Component {
             keys = ["esc", "command+alt+k", "control+alt+k"];
             text = QuickSearch.getTextForKeyCombinations(combo);
           } else keys = ["esc"];
+
           if (keys.indexOf(combo) >= 0 && this.state.value.length <= 0) {
             this.handleCloseModal();
+          } else if (keys.indexOf(combo) >= 0 && this.state.value.length > 0) {
+            this.setState({ value: "" });
+            this.onSuggestionsFetchRequested({ value: "" });
           } else {
             this.setState({ value: text });
             this.onSuggestionsFetchRequested({ value: text });
@@ -265,9 +269,10 @@ class CommandPalette extends React.Component {
           } else if (["command+alt+k", "control+alt+k"].indexOf(combo) >= 0) {
             this.setState({ value: "", mode: "QUICK_SEARCH" });
             this.focusInput();
-          } else if (["command+alt+g", "control+alt+g"].indexOf(combo) >= 0)
+          } else if (["command+alt+g", "control+alt+g"].indexOf(combo) >= 0) {
             this.setState({ value: "", mode: "GIT" });
-          else this.handleCloseModal();
+            this.focusInput();
+          } else this.handleCloseModal();
           return false;
         }
       );
