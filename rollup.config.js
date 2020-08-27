@@ -4,12 +4,14 @@ import resolve from "rollup-plugin-node-resolve";
 import replace from "rollup-plugin-replace";
 import commonjs from "rollup-plugin-commonjs";
 import postcss from "rollup-plugin-postcss";
+import image from "@rollup/plugin-image";
+import json from "@rollup/plugin-json";
 
 import pkg from "./package.json";
 
 const plugins = [
   replace({
-    "process.env.NODE_ENV": JSON.stringify("production")
+    "process.env.NODE_ENV": JSON.stringify("production"),
   }),
   postcss(),
   commonjs({
@@ -23,24 +25,26 @@ const plugins = [
         "createElement",
         "isValidElement",
         "cloneElement",
-        "createRef"
+        "createRef",
       ],
-      "node_modules/react-dom/index.js": ["render"]
-    }
+      "node_modules/react-dom/index.js": ["render"],
+    },
   }),
   babel({
     exclude: "node_modules/**",
-    runtimeHelpers: true
+    runtimeHelpers: true,
   }),
   resolve({
     jsnext: true,
     main: true,
-    browser: true
-  })
+    browser: true,
+  }),
+  image(),
+  json(),
 ];
 
 export default {
-  input: "src/command-palette.js",
+  input: "kloudi/components/modal-command-panel/ModalCommandPanel.js",
   external: ["react", "react-dom"],
   output: [
     {
@@ -48,17 +52,17 @@ export default {
       format: "umd",
       globals: {
         react: "React",
-        "react-dom": "ReactDOM"
+        "react-dom": "ReactDOM",
       },
       sourcemap: "external",
       name: "CommandPalette",
-      exports: "named"
+      exports: "named",
     },
     {
       file: pkg.module,
       format: "es",
-      sourcemap: "external"
-    }
+      sourcemap: "external",
+    },
   ],
-  plugins
+  plugins,
 };
