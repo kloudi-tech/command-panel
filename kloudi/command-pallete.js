@@ -18,6 +18,7 @@ import { QuickSearch, Git } from "./modes";
 import defaultTheme from "./components/modal-command-panel/ModalCommandPanelTheme";
 import { noop, override, after } from "../src/utils";
 
+import search from "./images/search.svg";
 import "./components/modal-command-panel/modal-command-panel.css";
 
 const allSuggestions = [];
@@ -327,6 +328,7 @@ class CommandPalette extends React.Component {
       value,
       onChange: this.onChange,
       onKeyDown: this.onKeyDown,
+      searchLogo: search,
     };
   }
 

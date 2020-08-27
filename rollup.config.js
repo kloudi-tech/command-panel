@@ -6,7 +6,6 @@ import commonjs from "rollup-plugin-commonjs";
 import postcss from "rollup-plugin-postcss";
 import image from "@rollup/plugin-image";
 import json from "@rollup/plugin-json";
-import copy from "rollup-plugin-copy";
 
 import pkg from "./package.json";
 
@@ -42,9 +41,6 @@ const plugins = [
   }),
   image(),
   json(),
-  copy({
-    targets: [{ src: "kloudi/images/", dest: "dist/" }],
-  }),
 ];
 
 export default {
