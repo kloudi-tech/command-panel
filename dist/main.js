@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.CommandPalette = {}, global.React, global.ReactDOM));
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.ModalCommandPanel = {}, global.React, global.ReactDOM));
 }(this, (function (exports, React, reactDom) { 'use strict';
 
   var React__default = 'default' in React ? React['default'] : React;
@@ -7291,7 +7291,40 @@
     return formatSuggestions(suggestionResults, value);
   };
 
-  var GIT_COMBO_TO_TEXT_DICT = require("../data/modal/modes/git/default-combo-to-text-dict.json");
+  var GIT_COMBO_TO_TEXT_DICT = [
+  	{
+  		key: "c l",
+  		value: "clone "
+  	},
+  	{
+  		key: "c o",
+  		value: "Comment"
+  	},
+  	{
+  		key: "P R",
+  		value: "Pull Request "
+  	},
+  	{
+  		key: "p r",
+  		value: "Pull Request "
+  	},
+  	{
+  		key: "p R",
+  		value: "Pull Request "
+  	},
+  	{
+  		key: "P r",
+  		value: "Pull Request "
+  	},
+  	{
+  		key: "c p r",
+  		value: "Create a new PR "
+  	},
+  	{
+  		key: "c r",
+  		value: "Create a "
+  	}
+  ];
 
   var GitSearch = function GitSearch() {
     classCallCheck(this, GitSearch);
@@ -7304,7 +7337,28 @@
     if (!item) return "";else return item.value;
   });
 
-  var QUICK_SEARCH_COMBO_TO_TEXT_DICT = require("../data/modal/modes/quick-search/default-combo-to-text-dict.json");
+  var QUICK_SEARCH_COMBO_TO_TEXT_DICT = [
+  	{
+  		key: "M",
+  		value: "Mark as "
+  	},
+  	{
+  		key: "m d",
+  		value: "Mark as Done"
+  	},
+  	{
+  		key: "m D",
+  		value: "Mark as Done"
+  	},
+  	{
+  		key: "m r",
+  		value: "Mark as Released"
+  	},
+  	{
+  		key: "m R",
+  		value: "Mark as Released"
+  	}
+  ];
 
   var QuickSearch = function QuickSearch() {
     classCallCheck(this, QuickSearch);

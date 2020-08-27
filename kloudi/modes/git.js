@@ -1,4 +1,4 @@
-const GIT_COMBO_TO_TEXT_DICT = require("../data/modal/modes/git/default-combo-to-text-dict.json");
+import GIT_COMBO_TO_TEXT_DICT from "../data/modal/modes/git/default-combo-to-text-dict.json";
 
 export default class GitSearch {
   static getTextForKeyCombinations = (combo) => {

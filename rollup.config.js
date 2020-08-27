@@ -55,7 +55,7 @@ export default {
         "react-dom": "ReactDOM",
       },
       sourcemap: "external",
-      name: "CommandPalette",
+      name: "ModalCommandPanel",
       exports: "named",
     },
     {
