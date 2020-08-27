@@ -43,7 +43,7 @@ const plugins = [
   image(),
   json(),
   copy({
-    targets: [{ src: "kloudi/images/search.svg", dest: "dist/" }],
+    targets: [{ src: "kloudi/images/", dest: "dist/" }],
   }),
 ];
 
