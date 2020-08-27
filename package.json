@@ -134,7 +134,8 @@
     "fuzzysort": "^1.1.4",
     "mousetrap": "kloudi-tech/mousetrap#master",
     "react-autosuggest": "kloudi-tech/autosuggest#main",
-    "react-modal": "^3.11.2"
+    "react-modal": "^3.11.2",
+    "rollup-plugin-copy": "^3.3.0"
   },
   "files": [
     "dist",
