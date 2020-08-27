@@ -40,6 +40,12 @@ export default function ModalCommandPanel(props) {
     else setHotkeys(DEFAULT_HOTKEYS);
   };
 
+  const dummyOnSelect = (command) => {
+    alert(`A suggested command was selected: \n
+  ${JSON.stringify(command)}
+  `);
+  };
+
   return (
     <CommandPalette
       commands={commands}
@@ -50,11 +56,7 @@ export default function ModalCommandPanel(props) {
       maxDisplayed={100}
       mode={mode}
       onCommandPanelModeChanged={handleCommandPanelModeChaned}
-      onSelect={(command) => {
-        alert(`A suggested command was selected: \n
-      ${JSON.stringify(command)}
-      `);
-      }}
+      onSelect={props.onSelect || dummyOnSelect}
       placeholder="Type your query"
       renderCommand={QuerySuggestions}
       resetInputOnClose
