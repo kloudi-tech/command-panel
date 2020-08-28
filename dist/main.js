@@ -7321,18 +7321,19 @@
 
     return /*#__PURE__*/React__default.createElement(CommandPalette, {
       commands: commands,
-      closeOnSelect: false,
+      closeOnSelect: true,
       header: ModalCommandPanelHeader(mode),
       highlightFirstSuggestion: true,
       hotKeys: hotkeys,
       maxDisplayed: 100,
       mode: mode,
       onCommandPanelModeChanged: handleCommandPanelModeChaned,
-      onSelect: props.onSelect || dummyOnSelect,
+      onSelect: function onSelect(command) {
+        if (props.onSelect) props.onSelect(command.name);else dummyOnSelect(command);
+      },
       placeholder: "Type your query",
       renderCommand: QuerySuggestions,
       resetInputOnClose: true,
-      showSpinnerOnSelect: true,
       theme: ModalCommandPanelTheme
     });
   }
