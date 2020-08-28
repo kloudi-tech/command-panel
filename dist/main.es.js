@@ -7291,25 +7291,15 @@ function ModalCommandPanel(props) {
       commands = _useState2[0],
       setCommands = _useState2[1];
 
-  var _useState3 = useState(false),
+  var _useState3 = useState(DEFAULT_HOTKEYS),
       _useState4 = slicedToArray(_useState3, 2),
-      closeOnSelect = _useState4[0],
-      setCloseOnSelect = _useState4[1];
+      hotkeys = _useState4[0],
+      setHotkeys = _useState4[1];
 
-  var _useState5 = useState(DEFAULT_HOTKEYS),
+  var _useState5 = useState("SEARCH"),
       _useState6 = slicedToArray(_useState5, 2),
-      hotkeys = _useState6[0],
-      setHotkeys = _useState6[1];
-
-  var _useState7 = useState("SEARCH"),
-      _useState8 = slicedToArray(_useState7, 2),
-      mode = _useState8[0],
-      setMode = _useState8[1];
-
-  var _useState9 = useState(true),
-      _useState10 = slicedToArray(_useState9, 2),
-      showSpinnerOnSelect = _useState10[0],
-      setShowSpinnerOnSelect = _useState10[1];
+      mode = _useState6[0],
+      setMode = _useState6[1];
 
   var handleCommandPanelModeChaned = function handleCommandPanelModeChaned(mode, prevMode) {
     setMode(mode);
@@ -7320,12 +7310,12 @@ function ModalCommandPanel(props) {
   };
 
   var dummyOnSelect = function dummyOnSelect(command) {
-    alert("A suggested command was selected: \n\n  ".concat(JSON.stringify(command), "\n  "));
+    console.log(JSON.stringify(command));
   };
 
   return /*#__PURE__*/React.createElement(CommandPalette, {
     commands: commands,
-    closeOnSelect: closeOnSelect,
+    closeOnSelect: false,
     header: ModalCommandPanelHeader(mode),
     highlightFirstSuggestion: true,
     hotKeys: hotkeys,
@@ -7336,7 +7326,7 @@ function ModalCommandPanel(props) {
     placeholder: "Type your query",
     renderCommand: QuerySuggestions,
     resetInputOnClose: true,
-    showSpinnerOnSelect: showSpinnerOnSelect,
+    showSpinnerOnSelect: true,
     theme: ModalCommandPanelTheme
   });
 }
