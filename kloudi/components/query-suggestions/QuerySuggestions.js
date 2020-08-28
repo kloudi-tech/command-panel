@@ -8,13 +8,17 @@ function renderShortcuts(shortcut) {
     if (shortcut.length == 1)
       return (
         <div className="kloudi-query-shortcut">
-          <kbd>{shortcut[0]}</kbd>
+          <kbd className="kbd">{shortcut[0]}</kbd>
         </div>
       );
     else {
       const data = [];
       for (const [i, item] of shortcut.entries()) {
-        data.push(<kbd key={i}>{item}</kbd>);
+        data.push(
+          <kbd className="kbd" key={i}>
+            {item}
+          </kbd>
+        );
         if (i != shortcut.length - 1)
           data.push(
             <span

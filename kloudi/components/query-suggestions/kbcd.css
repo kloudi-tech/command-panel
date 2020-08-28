@@ -10,7 +10,7 @@
  */
 /* Base style, essential for every key. */
 
-kbd {
+.kbd {
   font-family: "Lucida Console", monospace;
   display: inline-block;
   border-radius: 3px;
@@ -34,17 +34,17 @@ kbd {
   user-select: none;
 }
 
-kbd:hover,
-kbd:hover * {
+.kbd:hover,
+.kbd:hover * {
   color: black;
   background-color: #9b9b9b;
 }
-kbd:active,
-kbd:active * {
+.kbd:active,
+.kbd:active * {
   color: black;
 }
 
-kbd kbd {
+.kbd kbd {
   padding: 0px;
   margin: 0 1px;
   box-shadow: 0px 0px 0px black;
@@ -52,45 +52,11 @@ kbd kbd {
   background-color: none;
 }
 
-kbd kbd:hover {
+.kbd kbd:hover {
   box-shadow: 0px 0px 0px black;
 }
 
-kbd:active kbd {
+.kbd:active kbd {
   box-shadow: 0px 0px 0px black;
   background-color: none;
-}
-
-/* Deep blue */
-kbd.deep-blue,
-.deep-blue kbd {
-  background-color: steelblue;
-  color: #ffffff;
-}
-
-kbd.deep-blue:hover,
-kbd.deep-blue:hover *,
-.deep-blue kbd:hover {
-  color: white;
-}
-
-/* Dark apple */
-kbd.dark-apple,
-.dark-apple kbd {
-  background-color: black;
-  color: #ddd;
-}
-
-kbd.dark-apple:hover,
-kbd.dark-apple:hover *,
-.dark-apple kbd:hover {
-  color: white;
-}
-
-/* Type writer */
-kbd.type-writer,
-.type-writer kbd {
-  border-radius: 10px;
-  background-color: #333;
-  color: white;
 }
