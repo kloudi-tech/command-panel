@@ -328,7 +328,7 @@ class CommandPalette extends React.Component {
       value,
       onChange: this.onChange,
       onKeyDown: this.onKeyDown,
-      searchLogo: search,
+      search: search,
     };
   }
 

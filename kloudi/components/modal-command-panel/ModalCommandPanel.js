@@ -18,14 +18,10 @@ export default function ModalCommandPanel(props) {
       (item) => ["SEARCH", "MODE"].indexOf(item.mode) >= 0
     )
   );
-  const [closeOnSelect, setCloseOnSelect] = useState(
-    props.closeOnSelect || false
-  );
+  const [closeOnSelect, setCloseOnSelect] = useState(false);
   const [hotkeys, setHotkeys] = useState(DEFAULT_HOTKEYS);
   const [mode, setMode] = useState("SEARCH");
-  const [showSpinnerOnSelect, setShowSpinnerOnSelect] = useState(
-    props.showSpinnerOnSelect || false
-  );
+  const [showSpinnerOnSelect, setShowSpinnerOnSelect] = useState(true);
 
   const handleCommandPanelModeChaned = (mode, prevMode) => {
     setMode(mode);
