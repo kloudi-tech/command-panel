@@ -18,10 +18,8 @@ export default function ModalCommandPanel(props) {
       (item) => ["SEARCH", "MODE"].indexOf(item.mode) >= 0
     )
   );
-  const [closeOnSelect, setCloseOnSelect] = useState(false);
   const [hotkeys, setHotkeys] = useState(DEFAULT_HOTKEYS);
   const [mode, setMode] = useState("SEARCH");
-  const [showSpinnerOnSelect, setShowSpinnerOnSelect] = useState(true);
 
   const handleCommandPanelModeChaned = (mode, prevMode) => {
     setMode(mode);
@@ -37,15 +35,13 @@ export default function ModalCommandPanel(props) {
   };
 
   const dummyOnSelect = (command) => {
-    alert(`A suggested command was selected: \n
-  ${JSON.stringify(command)}
-  `);
+    console.log(JSON.stringify(command));
   };
 
   return (
     <CommandPalette
       commands={commands}
-      closeOnSelect={closeOnSelect}
+      closeOnSelect={false}
       header={ModalCommandPanelHeader(mode)}
       highlightFirstSuggestion
       hotKeys={hotkeys}
@@ -56,7 +52,7 @@ export default function ModalCommandPanel(props) {
       placeholder="Type your query"
       renderCommand={QuerySuggestions}
       resetInputOnClose
-      showSpinnerOnSelect={showSpinnerOnSelect}
+      showSpinnerOnSelect={true}
       theme={ModalCommandPanelTheme}
     />
   );
