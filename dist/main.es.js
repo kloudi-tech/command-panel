@@ -6521,6 +6521,13 @@ var CommandPalette = /*#__PURE__*/function (_React$Component) {
       }
     }
   }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      var hotKeys = this.props.hotKeys;
+      mousetrap.unbind(["esc"].concat(hotKeys));
+      if (this.commandPaletteInput && this.commandPaletteInput.input) mousetrap(this.commandPaletteInput.input).unbind(["esc"].concat(hotKeys));
+    }
+  }, {
     key: "onChange",
     value: function onChange(event, _ref) {
       var newValue = _ref.newValue;
@@ -7310,7 +7317,7 @@ function ModalCommandPanel(props) {
   };
 
   var dummyOnSelect = function dummyOnSelect(command) {
-    console.log(JSON.stringify(command));
+    alert(JSON.stringify(command));
   };
 
   return /*#__PURE__*/React.createElement(CommandPalette, {

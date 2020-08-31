@@ -122,6 +122,14 @@ class CommandPalette extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    const { hotKeys } = this.props;
+
+    Mousetrap.unbind(["esc"].concat(hotKeys));
+    if (this.commandPaletteInput && this.commandPaletteInput.input)
+      Mousetrap(this.commandPaletteInput.input).unbind(["esc"].concat(hotKeys));
+  }
+
   onChange(event, { newValue }) {
     const { onChange } = this.props;
     this.setState({

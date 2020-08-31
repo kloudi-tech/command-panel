@@ -35,7 +35,7 @@ export default function ModalCommandPanel(props) {
   };
 
   const dummyOnSelect = (command) => {
-    console.log(JSON.stringify(command));
+    alert(JSON.stringify(command));
   };
 
   return (
