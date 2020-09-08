@@ -261,7 +261,7 @@ var propTypes = createCommonjsModule(function (module) {
  * LICENSE file in the root directory of this source tree.
  */
 
-{
+var ReactIs, throwOnDirectAccess; {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
   module.exports = factoryWithThrowingShims();

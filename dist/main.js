@@ -4,8 +4,10 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.ModalCommandPanel = {}, global.React, global.ReactDOM));
 }(this, (function (exports, React, reactDom) { 'use strict';
 
-  var React__default = 'default' in React ? React['default'] : React;
-  reactDom = reactDom && Object.prototype.hasOwnProperty.call(reactDom, 'default') ? reactDom['default'] : reactDom;
+  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+  var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
+  var reactDom__default = /*#__PURE__*/_interopDefaultLegacy(reactDom);
 
   function _arrayWithHoles(arr) {
     if (Array.isArray(arr)) return arr;
@@ -267,7 +269,7 @@
    * LICENSE file in the root directory of this source tree.
    */
 
-  {
+var ReactIs, throwOnDirectAccess;   {
     // By explicitly using `prop-types` you are opting into new production behavior.
     // http://fb.me/prop-types-in-prod
     module.exports = factoryWithThrowingShims();
@@ -911,7 +913,7 @@
 
 
 
-  var _react2 = _interopRequireDefault(React__default);
+  var _react2 = _interopRequireDefault(React__default['default']);
 
 
 
@@ -1265,7 +1267,7 @@
     }]);
 
     return ModalPortal;
-  }(React__default.Component);
+  }(React__default['default'].Component);
 
   ModalPortal.defaultProps = {
     style: {
@@ -1489,11 +1491,11 @@
 
 
 
-  var _react2 = _interopRequireDefault(React__default);
+  var _react2 = _interopRequireDefault(React__default['default']);
 
 
 
-  var _reactDom2 = _interopRequireDefault(reactDom);
+  var _reactDom2 = _interopRequireDefault(reactDom__default['default']);
 
 
 
@@ -1665,7 +1667,7 @@
     }]);
 
     return Modal;
-  }(React__default.Component);
+  }(React__default['default'].Component);
 
   Modal.propTypes = {
     isOpen: _propTypes2.default.bool.isRequired,
@@ -2108,7 +2110,7 @@
   });
   exports["default"] = void 0;
 
-  var _react = _interopRequireWildcard(React__default);
+  var _react = _interopRequireWildcard(React__default['default']);
 
   var _propTypes = _interopRequireDefault(propTypes);
 
@@ -2200,7 +2202,7 @@
   });
   exports["default"] = void 0;
 
-  var _react = _interopRequireWildcard(React__default);
+  var _react = _interopRequireWildcard(React__default['default']);
 
   var _propTypes = _interopRequireDefault(propTypes);
 
@@ -2387,7 +2389,7 @@
   });
   exports["default"] = void 0;
 
-  var _react = _interopRequireWildcard(React__default);
+  var _react = _interopRequireWildcard(React__default['default']);
 
   var _propTypes = _interopRequireDefault(propTypes);
 
@@ -2544,7 +2546,7 @@
   });
   exports['default'] = void 0;
 
-  var _react = _interopRequireWildcard(React__default);
+  var _react = _interopRequireWildcard(React__default['default']);
 
   var _propTypes = _interopRequireDefault(propTypes);
 
@@ -3484,7 +3486,7 @@
   });
   exports["default"] = void 0;
 
-  var _react = _interopRequireWildcard(React__default);
+  var _react = _interopRequireWildcard(React__default['default']);
 
   var _propTypes = _interopRequireDefault(propTypes);
 
@@ -5414,10 +5416,10 @@
       cssClass = "default-spinner ".concat(theme, " modal");
     }
 
-    return /*#__PURE__*/React__default.createElement("div", {
+    return /*#__PURE__*/React__default['default'].createElement("div", {
       className: cssClass,
       role: "status"
-    }, /*#__PURE__*/React__default.createElement("span", {
+    }, /*#__PURE__*/React__default['default'].createElement("span", {
       className: "sr-only"
     }, "Loading..."));
   }; // When a developer adds custom spinner wrap it so that if its a string
@@ -5438,10 +5440,10 @@
       cssClass = "spinner ".concat(theme, " modal");
     }
 
-    return /*#__PURE__*/React__default.createElement("div", {
+    return /*#__PURE__*/React__default['default'].createElement("div", {
       className: cssClass,
       role: "status"
-    }, typeof spinner !== "string" ? /*#__PURE__*/React__default.createElement("span", {
+    }, typeof spinner !== "string" ? /*#__PURE__*/React__default['default'].createElement("span", {
       className: "sr-only"
     }, "Loading...") : null, spinner);
   };
@@ -5452,10 +5454,10 @@
         theme = props.theme;
 
     if (spinner) {
-      return /*#__PURE__*/React__default.createElement(CustomSpinnerComponent, props);
+      return /*#__PURE__*/React__default['default'].createElement(CustomSpinnerComponent, props);
     }
 
-    return /*#__PURE__*/React__default.createElement(DefaultSpinnerComponent, {
+    return /*#__PURE__*/React__default['default'].createElement(DefaultSpinnerComponent, {
       display: display,
       theme: theme
     });
@@ -5477,13 +5479,13 @@
 
   var DefaultCommand = function DefaultCommand(props) {
     var suggestion = props.suggestion;
-    return /*#__PURE__*/React__default.createElement("div", {
+    return /*#__PURE__*/React__default['default'].createElement("div", {
       className: "item"
-    }, suggestion.highlight ? /*#__PURE__*/React__default.createElement("span", {
+    }, suggestion.highlight ? /*#__PURE__*/React__default['default'].createElement("span", {
       dangerouslySetInnerHTML: {
         __html: suggestion.highlight
       }
-    }) : /*#__PURE__*/React__default.createElement("span", null, suggestion.name));
+    }) : /*#__PURE__*/React__default['default'].createElement("span", null, suggestion.name));
   };
 
   DefaultCommand.defaultProps = {
@@ -5508,10 +5510,10 @@
         renderCommand = props.renderCommand;
 
     if (renderCommand) {
-      return /*#__PURE__*/React__default.createElement("div", null, renderCommand(suggestion));
+      return /*#__PURE__*/React__default['default'].createElement("div", null, renderCommand(suggestion));
     }
 
-    return /*#__PURE__*/React__default.createElement(DefaultCommand, {
+    return /*#__PURE__*/React__default['default'].createElement(DefaultCommand, {
       suggestion: suggestion
     });
   };
@@ -5554,13 +5556,13 @@
   var DefaultTriggerComponent = function DefaultTriggerComponent(props) {
     var onClick = props.onClick,
         theme = props.theme;
-    return /*#__PURE__*/React__default.createElement("button", {
+    return /*#__PURE__*/React__default['default'].createElement("button", {
       className: theme,
       onClick: onClick,
       type: "button"
-    }, "Command Palette \xA0", /*#__PURE__*/React__default.createElement("kbd", {
+    }, "Command Palette \xA0", /*#__PURE__*/React__default['default'].createElement("kbd", {
       className: "ui mini horizontal grey label"
-    }, /*#__PURE__*/React__default.createElement("span", {
+    }, /*#__PURE__*/React__default['default'].createElement("span", {
       style: visualyHidden
     }, " Keyboard Shortcut "), "\u2318K"));
   };
@@ -5569,7 +5571,7 @@
     var onClick = props.onClick,
         trigger = props.trigger,
         theme = props.theme;
-    return /*#__PURE__*/React__default.createElement("div", {
+    return /*#__PURE__*/React__default['default'].createElement("div", {
       onClick: onClick,
       className: theme,
       onKeyPress: onClick,
@@ -5584,14 +5586,14 @@
         theme = props.theme;
 
     if (trigger) {
-      return /*#__PURE__*/React__default.createElement(CustomTriggerComponent, {
+      return /*#__PURE__*/React__default['default'].createElement(CustomTriggerComponent, {
         onClick: onClick,
         trigger: trigger,
         theme: theme
       });
     }
 
-    return /*#__PURE__*/React__default.createElement(DefaultTriggerComponent, {
+    return /*#__PURE__*/React__default['default'].createElement(DefaultTriggerComponent, {
       onClick: onClick,
       theme: theme
     });
@@ -6430,7 +6432,7 @@
   var Header = function Header(props) {
     var theme = props.theme,
         children = props.children;
-    return /*#__PURE__*/React__default.createElement("div", {
+    return /*#__PURE__*/React__default['default'].createElement("div", {
       className: theme.header
     }, children);
   };
@@ -6480,7 +6482,7 @@
       _this.renderModalCommandPalette = _this.renderModalCommandPalette.bind(assertThisInitialized(_this));
       _this.renderInlineCommandPalette = _this.renderInlineCommandPalette.bind(assertThisInitialized(_this));
       _this.fetchData = _this.fetchData.bind(assertThisInitialized(_this));
-      _this.commandPaletteInput = /*#__PURE__*/React__default.createRef();
+      _this.commandPaletteInput = /*#__PURE__*/React__default['default'].createRef();
       _this.focusInput = _this.focusInput.bind(assertThisInitialized(_this));
       return _this;
     }
@@ -6792,7 +6794,7 @@
     }, {
       key: "commandTemplate",
       value: function commandTemplate(suggestion) {
-        return /*#__PURE__*/React__default.createElement(RenderCommand, _extends_1({}, this.props, {
+        return /*#__PURE__*/React__default['default'].createElement(RenderCommand, _extends_1({}, this.props, {
           suggestion: suggestion
         }));
       } // eslint-disable-next-line react/sort-comp
@@ -6818,16 +6820,16 @@
             alwaysRenderCommands = _this$props5.alwaysRenderCommands;
 
         if (isLoading && showSpinnerOnSelect) {
-          return /*#__PURE__*/React__default.createElement(PaletteSpinner, {
+          return /*#__PURE__*/React__default['default'].createElement(PaletteSpinner, {
             spinner: spinner,
             display: display,
             theme: theme.spinner
           });
         }
 
-        return /*#__PURE__*/React__default.createElement("div", null, /*#__PURE__*/React__default.createElement(Header, {
+        return /*#__PURE__*/React__default['default'].createElement("div", null, /*#__PURE__*/React__default['default'].createElement(Header, {
           theme: theme
-        }, header), /*#__PURE__*/React__default.createElement(dist$2, {
+        }, header), /*#__PURE__*/React__default['default'].createElement(dist$2, {
           ref: function ref(input) {
             _this5.commandPaletteInput = input;
           },
@@ -6854,13 +6856,13 @@
             theme = _this$props6.theme,
             reactModalParentSelector = _this$props6.reactModalParentSelector,
             shouldReturnFocusAfterClose = _this$props6.shouldReturnFocusAfterClose;
-        return /*#__PURE__*/React__default.createElement("div", {
+        return /*#__PURE__*/React__default['default'].createElement("div", {
           className: "react-command-palette"
-        }, /*#__PURE__*/React__default.createElement(PaletteTrigger, {
+        }, /*#__PURE__*/React__default['default'].createElement(PaletteTrigger, {
           onClick: this.handleOpenModal,
           trigger: trigger,
           theme: theme.trigger
-        }), /*#__PURE__*/React__default.createElement(ReactModal, {
+        }), /*#__PURE__*/React__default['default'].createElement(ReactModal, {
           appElement: document.body,
           isOpen: showModal,
           parentSelector: function parentSelector() {
@@ -6881,7 +6883,7 @@
     }, {
       key: "renderInlineCommandPalette",
       value: function renderInlineCommandPalette() {
-        return /*#__PURE__*/React__default.createElement("div", {
+        return /*#__PURE__*/React__default['default'].createElement("div", {
           className: "react-command-palette"
         }, this.renderAutoSuggest());
       }
@@ -6902,7 +6904,7 @@
     }]);
 
     return CommandPalette;
-  }(React__default.Component);
+  }(React__default['default'].Component);
 
   CommandPalette.defaultProps = {
     alwaysRenderCommands: true,
@@ -7082,13 +7084,13 @@
   }
 
   function ModalCommandPanelHeader(mode) {
-    return /*#__PURE__*/React__default.createElement("div", {
+    return /*#__PURE__*/React__default['default'].createElement("div", {
       className: "header-wrapper"
-    }, /*#__PURE__*/React__default.createElement("span", {
+    }, /*#__PURE__*/React__default['default'].createElement("span", {
       className: "header-item"
-    }, /*#__PURE__*/React__default.createElement("span", {
+    }, /*#__PURE__*/React__default['default'].createElement("span", {
       className: "header-mode"
-    }, getModeName(mode)), " on COMMAND PANEL"), /*#__PURE__*/React__default.createElement("object", {
+    }, getModeName(mode)), " on COMMAND PANEL"), /*#__PURE__*/React__default['default'].createElement("object", {
       className: "header-logo",
       type: "image/svg+xml",
       data: img$1
@@ -7107,9 +7109,9 @@
   function renderShortcuts(shortcut) {
     if (!!shortcut) {
       if (typeof shortcut === "string") shortcut = [shortcut];
-      if (shortcut.length == 1) return /*#__PURE__*/React__default.createElement("div", {
+      if (shortcut.length == 1) return /*#__PURE__*/React__default['default'].createElement("div", {
         className: "kloudi-query-shortcut"
-      }, /*#__PURE__*/React__default.createElement("kbd", {
+      }, /*#__PURE__*/React__default['default'].createElement("kbd", {
         className: "kbd"
       }, shortcut[0]));else {
         var data = [];
@@ -7123,11 +7125,11 @@
                 i = _step$value[0],
                 item = _step$value[1];
 
-            data.push( /*#__PURE__*/React__default.createElement("kbd", {
+            data.push( /*#__PURE__*/React__default['default'].createElement("kbd", {
               className: "kbd",
               key: i
             }, item));
-            if (i != shortcut.length - 1) data.push( /*#__PURE__*/React__default.createElement("span", {
+            if (i != shortcut.length - 1) data.push( /*#__PURE__*/React__default['default'].createElement("span", {
               key: "".concat(i, "-span"),
               className: "kloudi-query-shortcut-text"
             }, " then"));
@@ -7138,7 +7140,7 @@
           _iterator.f();
         }
 
-        return /*#__PURE__*/React__default.createElement("div", {
+        return /*#__PURE__*/React__default['default'].createElement("div", {
           className: "kloudi-query-shortcut"
         }, data);
       }
@@ -7150,26 +7152,26 @@
         highlight = suggestion.highlight,
         icon = suggestion.icon,
         shortcut = suggestion.shortcut;
-    return /*#__PURE__*/React__default.createElement("div", {
+    return /*#__PURE__*/React__default['default'].createElement("div", {
       className: "kloudi-query-item"
-    }, icon ? /*#__PURE__*/React__default.createElement("object", {
+    }, icon ? /*#__PURE__*/React__default['default'].createElement("object", {
       className: "kloudi-query-icon",
       type: "image/svg+xml",
       data: icon
-    }) : /*#__PURE__*/React__default.createElement("svg", {
+    }) : /*#__PURE__*/React__default['default'].createElement("svg", {
       xmlns: "http://www.w3.org/2000/svg",
       className: "search",
       viewBox: "0 0 24 24"
-    }, /*#__PURE__*/React__default.createElement("circle", {
+    }, /*#__PURE__*/React__default['default'].createElement("circle", {
       cx: "11",
       cy: "11",
       r: "8"
-    }), /*#__PURE__*/React__default.createElement("line", {
+    }), /*#__PURE__*/React__default['default'].createElement("line", {
       x1: "21",
       y1: "21",
       x2: "16.65",
       y2: "16.65"
-    })), /*#__PURE__*/React__default.createElement("span", {
+    })), /*#__PURE__*/React__default['default'].createElement("span", {
       className: "kloudi-query-text",
       dangerouslySetInnerHTML: {
         __html: highlight || name
@@ -7326,7 +7328,7 @@
       alert(JSON.stringify(command));
     };
 
-    return /*#__PURE__*/React__default.createElement(CommandPalette, {
+    return /*#__PURE__*/React__default['default'].createElement(CommandPalette, {
       commands: commands,
       closeOnSelect: true,
       header: ModalCommandPanelHeader(mode),
