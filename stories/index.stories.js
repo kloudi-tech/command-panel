@@ -16,7 +16,6 @@ import {
 import { withInfo } from "@storybook/addon-info";
 import { withOptions } from "@storybook/addon-options";
 import { withTests } from "@storybook/addon-jest";
-import { withA11y } from "@storybook/addon-a11y";
 
 // sample component
 import sampleHeader from "../examples/sampleHeader";
@@ -66,9 +65,8 @@ storiesOf("Kloudi Command Panel", module)
     })
   )
   .addDecorator(withInfo)
-  .addDecorator(withA11y)
   .addDecorator(withKnobs)
-  .addDecorator((story) => (
+  .addDecorator(story => (
     <div
       style={{
         position: "relative",
