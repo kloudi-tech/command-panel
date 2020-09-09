@@ -1,7 +1,7 @@
 {
-  "name": "react-command-palette",
+  "name": "command-panel",
   "version": "0.13.0-0",
-  "description": "WAI-ARIA compliant React command palette like the one in Atom",
+  "description": "WAI-ARIA compliant Command Panel that Kloudi's uses",
   "main": "dist/main.js",
   "module": "dist/main.es.js",
   "scripts": {
@@ -21,23 +21,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/asabaylus/react-command-palette.git"
+    "url": "git+https://github.com/kloudi-tech/command-panel/"
   },
   "keywords": [
     "react",
     "command",
-    "palette",
-    "command palette",
-    "command-palette",
+    "panel",
+    "command panel",
+    "command-panel",
     "accessibile",
     "react-component"
   ],
-  "author": "Asa Baylus",
+  "author": "Kloudi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/asabaylus/react-command-palette/issues"
+    "url": "https://github.com/kloudi-tech/command-panel/issues"
   },
-  "homepage": "https://github.com/asabaylus/react-command-palette#readme",
+  "homepage": "https://github.com/kloudi-tech/command-panel/#readme",
   "peerDependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
