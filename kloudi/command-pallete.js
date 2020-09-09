@@ -401,7 +401,7 @@ class CommandPalette extends React.Component {
       shouldReturnFocusAfterClose,
     } = this.props;
     return (
-      <div className="react-command-palette">
+      <div className="command-panel">
         <PaletteTrigger
           onClick={this.handleOpenModal}
           trigger={trigger}
@@ -432,9 +432,7 @@ class CommandPalette extends React.Component {
   }
 
   renderInlineCommandPalette() {
-    return (
-      <div className="react-command-palette">{this.renderAutoSuggest()}</div>
-    );
+    return <div className="command-panel">{this.renderAutoSuggest()}</div>;
   }
 
   render() {

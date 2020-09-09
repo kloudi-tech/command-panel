@@ -6857,7 +6857,7 @@ var ReactIs, throwOnDirectAccess;   {
             reactModalParentSelector = _this$props6.reactModalParentSelector,
             shouldReturnFocusAfterClose = _this$props6.shouldReturnFocusAfterClose;
         return /*#__PURE__*/React__default['default'].createElement("div", {
-          className: "react-command-palette"
+          className: "command-panel"
         }, /*#__PURE__*/React__default['default'].createElement(PaletteTrigger, {
           onClick: this.handleOpenModal,
           trigger: trigger,
@@ -6884,7 +6884,7 @@ var ReactIs, throwOnDirectAccess;   {
       key: "renderInlineCommandPalette",
       value: function renderInlineCommandPalette() {
         return /*#__PURE__*/React__default['default'].createElement("div", {
-          className: "react-command-palette"
+          className: "command-panel"
         }, this.renderAutoSuggest());
       }
     }, {
