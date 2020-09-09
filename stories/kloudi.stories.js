@@ -16,25 +16,13 @@ import {
 import { withInfo } from "@storybook/addon-info";
 import { withOptions } from "@storybook/addon-options";
 import { withTests } from "@storybook/addon-jest";
-import { withA11y } from "@storybook/addon-a11y";
-
-// sample component
-import sampleHeader from "../examples/sampleHeader";
-import sampleAtomCommand from "../examples/sampleAtomCommand";
-import sampleChromeCommand from "../examples/sampleChromeCommand";
-import sampleSublimeCommand from "../examples/sampleSublimeCommand";
 
 // sample styles
 import "../themes/chrome.css";
 import "../themes/atom.css";
 import "../themes/sublime.css";
-import chrome from "../themes/chrome-theme";
-import atom from "../themes/atom-theme";
-import sublime from "../themes/sublime-theme";
 
 // command palette scripts
-import CommandPalette from "../src/command-palette";
-import commands from "../src/__mocks__/commands";
 import lotsOfCommands from "../src/__mocks__/lots_of_commands";
 import results from "../.jest-test-results.json";
 import ModalCommandPanel from "../kloudi/components/modal-command-panel/ModalCommandPanel";
@@ -48,14 +36,6 @@ function addCommandToArray(c) {
   }));
 }
 
-function Trigger() {
-  return (
-    <button type="button">
-      Press &ldquo;<kbd>command/ctrl+k</kbd>&rdquo; to run a command
-    </button>
-  );
-}
-
 const proccessedCommands = addCommandToArray(lotsOfCommands);
 
 storiesOf("Kloudi Command Panel", module)
@@ -66,7 +46,6 @@ storiesOf("Kloudi Command Panel", module)
     })
   )
   .addDecorator(withInfo)
-  .addDecorator(withA11y)
   .addDecorator(withKnobs)
   .addDecorator((story) => (
     <div
