@@ -66,7 +66,7 @@ storiesOf("Kloudi Command Panel", module)
   )
   .addDecorator(withInfo)
   .addDecorator(withKnobs)
-  .addDecorator(story => (
+  .addDecorator((story) => (
     <div
       style={{
         position: "relative",
@@ -120,7 +120,6 @@ storiesOf("Command Pallete", module)
     })
   )
   .addDecorator(withInfo)
-  .addDecorator(withA11y)
   .addDecorator(withKnobs)
   .addDecorator((story) => (
     <div
