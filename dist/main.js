@@ -7316,6 +7316,8 @@ var ReactIs, throwOnDirectAccess;   {
         mode = _useState6[0],
         setMode = _useState6[1];
 
+    var open = props.open;
+
     var handleCommandPanelModeChaned = function handleCommandPanelModeChaned(mode, prevMode) {
       setMode(mode);
       setCommands(DEFAULT_SUGGESTIONS.filter(function (item) {
@@ -7337,6 +7339,7 @@ var ReactIs, throwOnDirectAccess;   {
       maxDisplayed: 100,
       mode: mode,
       onCommandPanelModeChanged: handleCommandPanelModeChaned,
+      open: open,
       onSelect: function onSelect(command) {
         if (props.onSelect) props.onSelect(command.name);else dummyOnSelect(command);
       },
