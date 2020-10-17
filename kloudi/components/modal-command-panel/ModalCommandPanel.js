@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
 
 import CommandPalette from "../../command-pallete";
@@ -22,6 +23,7 @@ export default function ModalCommandPanel(props) {
   );
   const [hotkeys, setHotkeys] = useState(DEFAULT_HOTKEYS);
   const [mode, setMode] = useState("SEARCH");
+  const { open } = props;
 
   const handleCommandPanelModeChaned = (mode, prevMode) => {
     setMode(mode);
@@ -56,7 +58,7 @@ export default function ModalCommandPanel(props) {
   return (
     <CommandPalette
       commands={commands}
-      closeOnSelect={true}
+      closeOnSelect
       header={ModalCommandPanelHeader(mode)}
       highlightFirstSuggestion
       hotKeys={hotkeys}
@@ -64,6 +66,7 @@ export default function ModalCommandPanel(props) {
       mode={mode}
       trigger={<img src={logo} />}
       onCommandPanelModeChanged={handleCommandPanelModeChaned}
+      open={open}
       onSelect={(command) => {
         if (props.onSelect) props.onSelect(command.name);
         else dummyOnSelect(command);
