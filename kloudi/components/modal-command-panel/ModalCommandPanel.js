@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import CommandPalette from "../../command-pallete";
 import ModalCommandPanelHeader from "./header/ModalCommandPanelHeader";
 import ModalCommandPanelTheme from "./ModalCommandPanelTheme";
 import QuerySuggestions from "../query-suggestions/QuerySuggestions";
+
+import logo from "../../images/logo-solid.svg";
 
 import "./modal-command-panel.css";
 
@@ -38,6 +40,19 @@ export default function ModalCommandPanel(props) {
     alert(JSON.stringify(command));
   };
 
+  useEffect(() => {
+    if (props.suggestions && props.suggestions.length > 0)
+      setCommands([
+        ...props.suggestions.map((i, item) => ({
+          id: commands.length + i,
+          name: item,
+          mode: mode,
+          command() {},
+        })),
+        ...commands,
+      ]);
+  }, [props.suggestions]);
+
   return (
     <CommandPalette
       commands={commands}
@@ -47,6 +62,7 @@ export default function ModalCommandPanel(props) {
       hotKeys={hotkeys}
       maxDisplayed={100}
       mode={mode}
+      trigger={<img src={logo} />}
       onCommandPanelModeChanged={handleCommandPanelModeChaned}
       onSelect={(command) => {
         if (props.onSelect) props.onSelect(command.name);

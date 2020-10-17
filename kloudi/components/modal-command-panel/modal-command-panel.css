@@ -150,7 +150,15 @@
 }
 
 .kloudi-modal-trigger {
-  display: none;
+  position: absolute;
+  top: calc(100vh - 96px);
+  left: 50%;
+}
+.kloudi-modal-trigger > img {
+  width: 48px;
+  height: 48px;
+  box-shadow: 2px 2px 4px 2px rgba(69, 73, 91, 0.25);
+  border-radius: 50%;
 }
 
 .kloudi-modal-input-logo {
