@@ -45,7 +45,7 @@ export default function ModalCommandPanel(props) {
   useEffect(() => {
     if (props.suggestions && props.suggestions.length > 0)
       setCommands([
-        ...props.suggestions.map((i, item) => ({
+        ...props.suggestions.map((item, i) => ({
           id: commands.length + i,
           name: item,
           mode: mode,

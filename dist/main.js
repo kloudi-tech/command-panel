@@ -7363,7 +7363,7 @@ var ReactIs, throwOnDirectAccess;   {
     };
 
     React.useEffect(function () {
-      if (props.suggestions && props.suggestions.length > 0) setCommands([].concat(toConsumableArray(props.suggestions.map(function (i, item) {
+      if (props.suggestions && props.suggestions.length > 0) setCommands([].concat(toConsumableArray(props.suggestions.map(function (item, i) {
         return {
           id: commands.length + i,
           name: item,
