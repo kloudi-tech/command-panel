@@ -43,16 +43,18 @@ export default function ModalCommandPanel(props) {
   };
 
   useEffect(() => {
-    if (props.suggestions && props.suggestions.length > 0)
-      setCommands([
-        ...props.suggestions.map((item, i) => ({
-          id: commands.length + i,
-          name: item,
-          mode: mode,
-          command() {},
-        })),
-        ...commands,
-      ]);
+    let data = props.suggestions || [];
+    data = data.filter((item) => !!item && item.length > 0);
+    data = data.filter((value, index) => data.indexOf(value) === index);
+    data = data
+      .map((item, i) => ({
+        id: commands.length + i,
+        name: item,
+        mode: mode,
+        command() {},
+      }))
+      .concat(commands);
+    if (props.suggestions && props.suggestions.length > 0) setCommands(data);
   }, [props.suggestions]);
 
   return (

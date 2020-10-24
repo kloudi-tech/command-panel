@@ -1,36 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import reactDom from 'react-dom';
 
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-      arr2[i] = arr[i];
-    }
-
-    return arr2;
-  }
-}
-
-var arrayWithoutHoles = _arrayWithoutHoles;
-
-function _iterableToArray(iter) {
-  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
-}
-
-var iterableToArray = _iterableToArray;
-
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
-}
-
-var nonIterableSpread = _nonIterableSpread;
-
-function _toConsumableArray(arr) {
-  return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
-}
-
-var toConsumableArray = _toConsumableArray;
-
 function _arrayWithHoles(arr) {
   if (Array.isArray(arr)) return arr;
 }
@@ -7355,14 +7325,22 @@ function ModalCommandPanel(props) {
   };
 
   useEffect(function () {
-    if (props.suggestions && props.suggestions.length > 0) setCommands([].concat(toConsumableArray(props.suggestions.map(function (item, i) {
+    var data = props.suggestions || [];
+    data = data.filter(function (item) {
+      return !!item && item.length > 0;
+    });
+    data = data.filter(function (value, index) {
+      return data.indexOf(value) === index;
+    });
+    data = data.map(function (item, i) {
       return {
         id: commands.length + i,
         name: item,
         mode: mode,
         command: function command() {}
       };
-    })), toConsumableArray(commands)));
+    }).concat(commands);
+    if (props.suggestions && props.suggestions.length > 0) setCommands(data);
   }, [props.suggestions]);
   return /*#__PURE__*/React.createElement(CommandPalette, {
     commands: commands,
