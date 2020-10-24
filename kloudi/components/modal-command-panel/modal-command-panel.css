@@ -151,7 +151,7 @@
 
 .kloudi-modal-trigger {
   position: absolute;
-  top: calc(100vh - 128px);
+  top: calc(100vh - 72px);
   left: 50%;
   border-radius: 50%;
 }
