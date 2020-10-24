@@ -151,17 +151,18 @@
 
 .kloudi-modal-trigger {
   position: absolute;
-  top: calc(100vh - 96px);
+  top: calc(100vh - 128px);
   left: 50%;
   border-radius: 50%;
 }
 .kloudi-modal-trigger > img {
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56x;
   box-shadow: 0 4px 8px 0 rgba(69, 73, 91, 0.5);
   border-radius: 50%;
   transition: box-shadow 100ms ease-in-out, transform 100ms ease-in-out;
   padding: 4px;
+  background-color: white;
 }
 
 .kloudi-modal-trigger > img:hover {
