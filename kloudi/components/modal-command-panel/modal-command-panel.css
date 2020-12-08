@@ -1,10 +1,3 @@
-@font-face {
-  font-family: "AvenirNext";
-  src: url("../../fonts/AvenirNext-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
 .kloudi-modal-overlay {
   position: fixed;
   top: 0px;

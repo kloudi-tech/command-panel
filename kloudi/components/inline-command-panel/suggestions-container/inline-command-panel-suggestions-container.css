@@ -1,17 +1,3 @@
-@font-face {
-  font-family: "AvenirNext";
-  src: url("../../../fonts/AvenirNext-Medium.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "AvenirNext";
-  src: url("../../../fonts/AvenirNext-DemiBold.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
-}
-
 .suggestions-container-wrapper {
   color: #4a4a4a;
   display: flex;
