@@ -1,8 +1,22 @@
+@font-face {
+  font-family: "AvenirNext";
+  src: url("../../../fonts/AvenirNext-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "AvenirNext";
+  src: url("../../../fonts/AvenirNext-DemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
 .command-panel-header-wrapper {
   color: black;
   display: flex;
   flex-direction: row;
-  font-family: "Nunito Sans", -apple-system, system-ui, BlinkMacSystemFont,
+  font-family: "AvenirNext", -apple-system, system-ui, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -23,7 +37,7 @@
 .command-panel-header-mode {
   border-radius: 8px;
   background-color: #f7f7f7;
-  font-family: "Nunito Sans", -apple-system, system-ui, BlinkMacSystemFont,
+  font-family: "AvenirNext", -apple-system, system-ui, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   padding: 4px 8px;
   color: #555;

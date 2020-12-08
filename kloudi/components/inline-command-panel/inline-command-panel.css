@@ -1,4 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
+@font-face {
+  font-family: "AvenirNext";
+  src: url("../../fonts/AvenirNext-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 
 @media only screen and (min-width: 0px) {
   .kloudi-inline-container {
@@ -13,7 +18,7 @@
 }
 
 .kloudi-inline-container {
-  font-family: "Nunito Sans", -apple-system, system-ui, BlinkMacSystemFont,
+  font-family: "AvenirNext", -apple-system, system-ui, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -37,7 +42,7 @@
   line-height: normal;
   letter-spacing: normal;
   color: #4a4a4a;
-  font-family: "Nunito Sans", -apple-system, system-ui, BlinkMacSystemFont,
+  font-family: "AvenirNext", -apple-system, system-ui, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 
   border: none;
@@ -48,7 +53,7 @@
 .kloudi-inline-input::-moz-placeholder {
   border-bottom: solid 1px #e4e5ec;
   color: #9b9b9b;
-  font-family: "Nunito Sans";
+  font-family: "AvenirNext";
   font-weight: normal;
   padding-right: 2px;
 }
@@ -56,7 +61,7 @@
 .kloudi-inline-input::placeholder {
   border-bottom: solid 1px #e4e5ec;
   color: #9b9b9b;
-  font-family: "Nunito Sans";
+  font-family: "AvenirNext";
   font-weight: normal;
   padding-right: 2px;
 }
@@ -64,7 +69,7 @@
 .kloudi-inline-input::-ms-input-placeholder {
   border-bottom: solid 1px #e4e5ec;
   color: #9b9b9b;
-  font-family: "Nunito Sans";
+  font-family: "AvenirNext";
   font-weight: normal;
   padding-right: 2px;
 }
