@@ -16,12 +16,12 @@ function getModeName(mode) {
 }
 export default function ModalCommandPanelHeader(mode) {
   return (
-    <div className={`command-panel-header-wrapper`}>
+    <div className="command-panel-header-wrapper">
       <span className="command-panel-header-item">
         <span className="command-panel-header-mode">{getModeName(mode)}</span>
-        {` on COMMAND PANEL`}
       </span>
       <object
+        title="logo"
         className="command-panel-header-logo"
         type="image/svg+xml"
         data={logo}
