@@ -7090,7 +7090,8 @@ var ReactIs, throwOnDirectAccess;   {
       className: "command-panel-header-item"
     }, /*#__PURE__*/React__default['default'].createElement("span", {
       className: "command-panel-header-mode"
-    }, getModeName(mode)), " on COMMAND PANEL"), /*#__PURE__*/React__default['default'].createElement("object", {
+    }, getModeName(mode))), /*#__PURE__*/React__default['default'].createElement("object", {
+      title: "logo",
       className: "command-panel-header-logo",
       type: "image/svg+xml",
       data: img$1

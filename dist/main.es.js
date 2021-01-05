@@ -7082,7 +7082,8 @@ function ModalCommandPanelHeader(mode) {
     className: "command-panel-header-item"
   }, /*#__PURE__*/React.createElement("span", {
     className: "command-panel-header-mode"
-  }, getModeName(mode)), " on COMMAND PANEL"), /*#__PURE__*/React.createElement("object", {
+  }, getModeName(mode))), /*#__PURE__*/React.createElement("object", {
+    title: "logo",
     className: "command-panel-header-logo",
     type: "image/svg+xml",
     data: img$1
