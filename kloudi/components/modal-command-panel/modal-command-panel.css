@@ -32,7 +32,7 @@
   border-radius: 8px;
   border-bottom: solid 1px #e4e5ec;
   box-shadow: 2px 2px 8px 4px rgba(69, 73, 91, 0.25);
-  margin: calc((100vh - 402px) / 2) 0;
+  margin: calc((100vh - 405px) / 2) 0;
 
   overflow: hidden;
   outline: none;
