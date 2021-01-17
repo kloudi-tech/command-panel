@@ -19,6 +19,7 @@ import defaultTheme from "./components/modal-command-panel/ModalCommandPanelThem
 import { noop, override, after } from "../src/utils";
 
 import search from "./images/search.svg";
+
 import "./components/modal-command-panel/modal-command-panel.css";
 
 const allSuggestions = [];
@@ -449,20 +450,20 @@ class CommandPalette extends React.Component {
 
 CommandPalette.defaultProps = {
   alwaysRenderCommands: true,
-  placeholder: "Type a command",
+  placeholder: "Type your query",
   hotKeys: "command+shift+p",
   defaultInputValue: "",
   header: null,
   highlightFirstSuggestion: true,
-  maxDisplayed: 7,
+  maxDisplayed: 100,
   options: fuzzysortOptions,
   onChange: noop,
   onHighlight: noop,
   onSelect: noop,
   onAfterOpen: noop,
   onRequestClose: noop,
-  closeOnSelect: false,
-  resetInputOnClose: false,
+  closeOnSelect: true,
+  resetInputOnClose: true,
   display: "modal",
   reactModalParentSelector: "body",
   renderCommand: null,
