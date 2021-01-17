@@ -9870,7 +9870,9 @@ function ModalCommandPanel(props) {
       view = _useState8[0],
       setView = _useState8[1];
 
-  var _useSubmitQuery = useSubmitQuery({}),
+  var _useSubmitQuery = useSubmitQuery({
+    payload: props.defaultPayload
+  }),
       execute = _useSubmitQuery.execute,
       status = _useSubmitQuery.status,
       data = _useSubmitQuery.data,

@@ -43,7 +43,9 @@ export default function ModalCommandPanel(props) {
       trigger={<img src={logo} alt="kloudi" />}
     />
   );
-  const { execute, status, data, error } = useSubmitQuery({});
+  const { execute, status, data, error } = useSubmitQuery({
+    payload: props.defaultPayload,
+  });
 
   function handleCommandPanelModeChaned(mode, prevMode) {
     /*
