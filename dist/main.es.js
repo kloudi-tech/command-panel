@@ -2480,7 +2480,7 @@ var StateStore = /*#__PURE__*/function () {
 
 var stateStore = new StateStore();
 
-var BASE_URL = process.env.GATSBY_API_UR;
+var BASE_URL = process.env.GATSBY_API_URL;
 
 function getAuthToken() {
   if (process.env.PLATFORM === "VSCODE") {

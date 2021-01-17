@@ -3,7 +3,7 @@ import Axios from "axios";
 import keyStore from "../store/KeyValStore";
 import stateStore from "../store/StateStore";
 
-const BASE_URL = process.env.GATSBY_API_UR;
+const BASE_URL = process.env.GATSBY_API_URL;
 
 function getAuthToken() {
   if (process.env.PLATFORM === "VSCODE") {
