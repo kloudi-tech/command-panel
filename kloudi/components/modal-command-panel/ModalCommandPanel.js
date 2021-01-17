@@ -72,10 +72,9 @@ export default function ModalCommandPanel(props) {
   useEffect(() => {
     if (
       (status === "SUCCESS" || status === "ERROR") &&
-      this.props.handleCommandSubmitted
-    ) {
-      this.props.handleCommandSubmitted(data);
-    }
+      props.handleCommandSubmitted
+    )
+      props.handleCommandSubmitted(data);
   }, [data, error, status]);
 
   useEffect(() => {

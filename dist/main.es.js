@@ -9827,8 +9827,6 @@ var DEFAULT_QUICK_SEARCH_HOTKEYS = [
 ];
 
 function ModalCommandPanel(props) {
-  var _this = this;
-
   var open = props.open,
       suggestions = props.suggestions;
 
@@ -9898,9 +9896,7 @@ function ModalCommandPanel(props) {
   }
 
   useEffect(function () {
-    if ((status === "SUCCESS" || status === "ERROR") && _this.props.handleCommandSubmitted) {
-      _this.props.handleCommandSubmitted(data);
-    }
+    if ((status === "SUCCESS" || status === "ERROR") && props.handleCommandSubmitted) props.handleCommandSubmitted(data);
   }, [data, error, status]);
   useEffect(function () {
     var data = props.suggestions || [];
