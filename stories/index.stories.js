@@ -217,17 +217,20 @@ storiesOf("Command Pallete", module)
       },
     }
   )
-  .add("is toggled open", () =>
+  .add(
+    "is toggled open",
+    () => {
+      const open = boolean("Open", true);
+      return <CommandPalette commands={commands} open={open} />;
+    },
     {
-    const open = boolean("Open", true);
-    return <CommandPalette commands={commands} open={open} />
-    }, {
-    info: {
-      text: `Adding an _open_ prop will force the command palette to be displayed
+      info: {
+        text: `Adding an _open_ prop will force the command palette to be displayed
       when it mounts. By default command palette will be hidden until the _trigger_
       is cliked.`,
-    },
-  })
+      },
+    }
+  )
   .add("with defaults", () => {
     // Knobs Addon for Commands object
     const commandsInput = object("Commands", commands);
