@@ -33,11 +33,7 @@ export default function ModalCommandPanel(props) {
       mode={mode}
       onCommandPanelModeChanged={handleCommandPanelModeChaned}
       open={open}
-      onSelect={(command) => {
-        props.onSelect
-          ? props.onSelect(command.name)
-          : execute({ q: command.name });
-      }}
+      onSelect={handleOnSelect}
       renderCommand={QuerySuggestions}
       theme={ModalCommandPanelTheme}
       trigger={<img src={logo} alt="kloudi" />}
@@ -69,6 +65,11 @@ export default function ModalCommandPanel(props) {
         else if (item.mode === mode) return item;
       })
     );
+  }
+
+  function handleOnSelect(command) {
+    const query = command.name;
+    execute({ q: query });
   }
 
   useEffect(() => {
@@ -103,11 +104,7 @@ export default function ModalCommandPanel(props) {
         mode={mode}
         onCommandPanelModeChanged={handleCommandPanelModeChaned}
         open={open}
-        onSelect={(command) => {
-          props.onSelect
-            ? props.onSelect(command.name)
-            : execute({ q: command.name });
-        }}
+        onSelect={handleOnSelect}
         renderCommand={QuerySuggestions}
         theme={ModalCommandPanelTheme}
         trigger={<img src={logo} alt="kloudi" />}
