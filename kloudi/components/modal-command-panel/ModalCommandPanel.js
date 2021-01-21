@@ -70,20 +70,15 @@ export default function ModalCommandPanel(props) {
 
   function handleOnSelect(command) {
     const query = command.name;
+    setOpen(true);
     execute({ q: query });
   }
 
-  function toggle() {
-    setOpen(!open);
-  }
-
   useEffect(() => {
-    toggle();
-    if (
-      (status === "SUCCESS" || status === "ERROR") &&
-      props.handleCommandSubmitted
-    )
-      props.handleCommandSubmitted(data);
+    if (status === "SUCCESS" || status === "ERROR") {
+      setOpen(false);
+      if (props.handleCommandSubmitted) props.handleCommandSubmitted(data);
+    }
   }, [data, error, status]);
 
   useEffect(() => {
@@ -102,7 +97,7 @@ export default function ModalCommandPanel(props) {
   }, [props.suggestions]);
 
   useEffect(() => {
-    setOpen(props.open);
+    setOpen(props.open || false);
   }, [props.open]);
 
   useEffect(() => {

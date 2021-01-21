@@ -9933,18 +9933,17 @@ function ModalCommandPanel(props) {
 
   function handleOnSelect(command) {
     var query = command.name;
+    setOpen(true);
     execute({
       q: query
     });
   }
 
-  function toggle() {
-    setOpen(!open);
-  }
-
   useEffect(function () {
-    toggle();
-    if ((status === "SUCCESS" || status === "ERROR") && props.handleCommandSubmitted) props.handleCommandSubmitted(data);
+    if (status === "SUCCESS" || status === "ERROR") {
+      setOpen(false);
+      if (props.handleCommandSubmitted) props.handleCommandSubmitted(data);
+    }
   }, [data, error, status]);
   useEffect(function () {
     var data = props.suggestions || [];
@@ -9965,7 +9964,7 @@ function ModalCommandPanel(props) {
     if (props.suggestions && props.suggestions.length > 0) setCommands(data);
   }, [props.suggestions]);
   useEffect(function () {
-    setOpen(props.open);
+    setOpen(props.open || false);
   }, [props.open]);
   useEffect(function () {
     setView( /*#__PURE__*/React.createElement(CommandPalette, {

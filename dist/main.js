@@ -9941,18 +9941,17 @@
 
     function handleOnSelect(command) {
       var query = command.name;
+      setOpen(true);
       execute({
         q: query
       });
     }
 
-    function toggle() {
-      setOpen(!open);
-    }
-
     React.useEffect(function () {
-      toggle();
-      if ((status === "SUCCESS" || status === "ERROR") && props.handleCommandSubmitted) props.handleCommandSubmitted(data);
+      if (status === "SUCCESS" || status === "ERROR") {
+        setOpen(false);
+        if (props.handleCommandSubmitted) props.handleCommandSubmitted(data);
+      }
     }, [data, error, status]);
     React.useEffect(function () {
       var data = props.suggestions || [];
@@ -9973,7 +9972,7 @@
       if (props.suggestions && props.suggestions.length > 0) setCommands(data);
     }, [props.suggestions]);
     React.useEffect(function () {
-      setOpen(props.open);
+      setOpen(props.open || false);
     }, [props.open]);
     React.useEffect(function () {
       setView( /*#__PURE__*/React__default['default'].createElement(CommandPalette, {
