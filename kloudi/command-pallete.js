@@ -469,7 +469,7 @@ CommandPalette.defaultProps = {
   onSelect: noop,
   onAfterOpen: noop,
   onRequestClose: noop,
-  closeOnSelect: true,
+  closeOnSelect: false,
   resetInputOnClose: true,
   display: "modal",
   reactModalParentSelector: "body",

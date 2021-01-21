@@ -18,13 +18,14 @@ import DEFAULT_GIT_MODE_HOTKEYS from "../../data/modal/modes/git/default-hotkeys
 import DEFAULT_QUICK_SEARCH_HOTKEYS from "../../data/modal/modes/quick-search/default-hotkeys.json";
 
 export default function ModalCommandPanel(props) {
-  const { open, suggestions } = props;
+  const { suggestions } = props;
 
   const [commands, setCommands] = useState(
     DEFAULT_SUGGESTIONS.filter((i) => ["SEARCH", "MODE"].indexOf(i.mode) >= 0)
   );
   const [hotkeys, setHotkeys] = useState(DEFAULT_HOTKEYS);
   const [mode, setMode] = useState("SEARCH");
+  const [open, setOpen] = useState(props.open || false);
   const [view, setView] = useState(
     <CommandPalette
       commands={commands}
@@ -72,7 +73,12 @@ export default function ModalCommandPanel(props) {
     execute({ q: query });
   }
 
+  function toggle() {
+    setOpen(!open);
+  }
+
   useEffect(() => {
+    toggle();
     if (
       (status === "SUCCESS" || status === "ERROR") &&
       props.handleCommandSubmitted
@@ -96,6 +102,10 @@ export default function ModalCommandPanel(props) {
   }, [props.suggestions]);
 
   useEffect(() => {
+    setOpen(props.open);
+  }, [props.open]);
+
+  useEffect(() => {
     setView(
       <CommandPalette
         commands={commands}
@@ -110,7 +120,7 @@ export default function ModalCommandPanel(props) {
         trigger={<img src={logo} alt="kloudi" />}
       />
     );
-  }, [commands, hotkeys, mode, props.open]);
+  }, [commands, hotkeys, mode, open]);
 
   return view;
 }

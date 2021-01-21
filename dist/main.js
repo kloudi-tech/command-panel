@@ -9487,7 +9487,7 @@
     onSelect: noop,
     onAfterOpen: noop,
     onRequestClose: noop,
-    closeOnSelect: true,
+    closeOnSelect: false,
     resetInputOnClose: true,
     display: "modal",
     reactModalParentSelector: "body",
@@ -9869,8 +9869,7 @@
   ];
 
   function ModalCommandPanel(props) {
-    var open = props.open,
-        suggestions = props.suggestions;
+    var suggestions = props.suggestions;
 
     var _useState = React.useState(DEFAULT_SUGGESTIONS.filter(function (i) {
       return ["SEARCH", "MODE"].indexOf(i.mode) >= 0;
@@ -9889,7 +9888,12 @@
         mode = _useState6[0],
         setMode = _useState6[1];
 
-    var _useState7 = React.useState( /*#__PURE__*/React__default['default'].createElement(CommandPalette, {
+    var _useState7 = React.useState(props.open || false),
+        _useState8 = slicedToArray(_useState7, 2),
+        open = _useState8[0],
+        setOpen = _useState8[1];
+
+    var _useState9 = React.useState( /*#__PURE__*/React__default['default'].createElement(CommandPalette, {
       commands: commands,
       header: ModalCommandPanelHeader(mode),
       hotKeys: hotkeys,
@@ -9904,9 +9908,9 @@
         alt: "kloudi"
       })
     })),
-        _useState8 = slicedToArray(_useState7, 2),
-        view = _useState8[0],
-        setView = _useState8[1];
+        _useState10 = slicedToArray(_useState9, 2),
+        view = _useState10[0],
+        setView = _useState10[1];
 
     var _useSubmitQuery = useSubmitQuery({
       payload: props.defaultPayload
@@ -9942,7 +9946,12 @@
       });
     }
 
+    function toggle() {
+      setOpen(!open);
+    }
+
     React.useEffect(function () {
+      toggle();
       if ((status === "SUCCESS" || status === "ERROR") && props.handleCommandSubmitted) props.handleCommandSubmitted(data);
     }, [data, error, status]);
     React.useEffect(function () {
@@ -9964,6 +9973,9 @@
       if (props.suggestions && props.suggestions.length > 0) setCommands(data);
     }, [props.suggestions]);
     React.useEffect(function () {
+      setOpen(props.open);
+    }, [props.open]);
+    React.useEffect(function () {
       setView( /*#__PURE__*/React__default['default'].createElement(CommandPalette, {
         commands: commands,
         header: ModalCommandPanelHeader(mode),
@@ -9979,7 +9991,7 @@
           alt: "kloudi"
         })
       }));
-    }, [commands, hotkeys, mode, props.open]);
+    }, [commands, hotkeys, mode, open]);
     return view;
   }
 
