@@ -2619,6 +2619,8 @@ var useSubmitQuery = function useSubmitQuery(props) {
     setData([]);
     setError(undefined);
     return submit(newPayload).then(function (response) {
+      stateStore.clear();
+      stateStore.set(response.query.intent, response);
       setData(response);
       setStatus("SUCCESS");
     })["catch"](function (error) {

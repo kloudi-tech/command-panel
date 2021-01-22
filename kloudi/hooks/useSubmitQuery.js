@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 
 import remoteSource from "../data/remote/RemoteSource";
+import stateStore from "../data/store/StateStore";
 
 export const useSubmitQuery = (props) => {
   const submit = async function (payload) {
@@ -28,6 +29,8 @@ export const useSubmitQuery = (props) => {
 
     return submit(newPayload)
       .then((response) => {
+        stateStore.clear();
+        stateStore.set(response.query.intent, response);
         setData(response);
         setStatus("SUCCESS");
       })
