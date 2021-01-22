@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 
 import { useSubmitQuery } from "../../hooks/useSubmitQuery";
-import stateStore from "../../data/store/StateStore";
 
 import CommandPalette from "../../command-pallete";
 import ModalCommandPanelHeader from "./header/ModalCommandPanelHeader";

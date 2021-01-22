@@ -2383,111 +2383,10 @@ var KeyValStore = /*#__PURE__*/function () {
 
 var keyStore = new KeyValStore();
 
-/**
- *
- * @param {Object} prevPayload
- * @param {Object} currentPayload
- * @param {Array<Function>} subscribers
- */
-function maybeBroadcastDataChange(prevPayload, currentPayload, subscribers) {
-  if (prevPayload !== currentPayload) {
-    if (subscribers) {
-      subscribers.forEach(function (subscriber) {
-        subscriber(currentPayload);
-      });
-    }
-  }
-}
-
-var StateStore = /*#__PURE__*/function () {
-  /**
-   *
-   */
-  function StateStore() {
-    classCallCheck(this, StateStore);
-
-    this.store = {};
-    this.subscribers = {};
-  }
-
-  createClass(StateStore, [{
-    key: "set",
-    value: function set(key, value) {
-      var prevValue = this.store[key];
-      this.store[key] = value;
-      maybeBroadcastDataChange(prevValue, value, this.subscribers[key]);
-    }
-  }, {
-    key: "get",
-    value: function get(key, defaultValue) {
-      return this.store[key] || defaultValue;
-    }
-  }, {
-    key: "removeData",
-    value: function removeData(key) {
-      if (this.store[key]) {
-        this.store[key] = null;
-        maybeBroadcastDataChange({}, null, this.subscribers[key]);
-      }
-    }
-  }, {
-    key: "clear",
-    value: function clear() {
-      this.store = {};
-    }
-    /**
-     *
-     * @param {String} key
-     * @param {Function} func
-     */
-
-  }, {
-    key: "subscribe",
-    value: function subscribe(key, func) {
-      var _this = this;
-
-      if (!this.subscribers[key]) this.subscribers[key] = [];
-      this.subscribers[key].push(func);
-      return function () {
-        _this.unsubscribe(key, func);
-      };
-    }
-  }, {
-    key: "unsubscribe",
-    value: function unsubscribe(key, func) {
-      this.removeData(key);
-
-      if (!this.subscribers[key]) {
-        throw new Error("Trying to unsubscribe when you have not subscribed");
-      }
-
-      var subscribers = this.subscribers[key].filter(function (subscriber) {
-        return subscriber !== func;
-      });
-      this.subscribers[key] = subscribers;
-    }
-  }, {
-    key: "maybeInitializeKey",
-    value: function maybeInitializeKey(key, defaultValue) {
-      if (!this.store[key]) {
-        this.store[key] = defaultValue;
-      }
-    }
-  }]);
-
-  return StateStore;
-}();
-
-var stateStore = new StateStore();
-
 var BASE_URL = process.env.GATSBY_API_URL;
 
 function getAuthToken() {
-  if (process.env.PLATFORM === "VSCODE") {
-    return stateStore.get("KLOUDI_AUTH_TOKEN");
-  }
-
-  return keyStore.get("KLOUDI_AUTH_TOKEN") || stateStore.get("KLOUDI_AUTH_TOKEN");
+  return keyStore.get("KLOUDI_AUTH_TOKEN");
 }
 
 function getError(message, status) {
@@ -2619,8 +2518,6 @@ var useSubmitQuery = function useSubmitQuery(props) {
     setData([]);
     setError(undefined);
     return submit(newPayload).then(function (response) {
-      stateStore.clear();
-      stateStore.set(response.query.intent, response);
       setData(response);
       setStatus("SUCCESS");
     })["catch"](function (error) {

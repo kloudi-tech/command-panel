@@ -1,17 +1,11 @@
 import Axios from "axios";
 
 import keyStore from "../store/KeyValStore";
-import stateStore from "../store/StateStore";
 
 const BASE_URL = process.env.GATSBY_API_URL;
 
 function getAuthToken() {
-  if (process.env.PLATFORM === "VSCODE") {
-    return stateStore.get("KLOUDI_AUTH_TOKEN");
-  }
-  return (
-    keyStore.get("KLOUDI_AUTH_TOKEN") || stateStore.get("KLOUDI_AUTH_TOKEN")
-  );
+  return keyStore.get("KLOUDI_AUTH_TOKEN");
 }
 
 function getError(message, status) {
