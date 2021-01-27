@@ -151,17 +151,24 @@
 .kloudi-modal-trigger {
   position: absolute;
   top: calc(100vh - 96px);
-  left: 50%;
-  border-radius: 50%;
+  left: 0%;
+  height: 96px;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(0, 0, 0, 0.2) 80%
+  );
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(4px);
 }
 .kloudi-modal-trigger > img {
   width: 56px;
-  height: 56x;
+  height: 56px;
   box-shadow: 0 4px 8px 0 rgba(69, 73, 91, 0.5);
   border-radius: 50%;
   transition: box-shadow 100ms ease-in-out, transform 100ms ease-in-out;
   padding: 4px;
   background-color: white;
+  margin: 0 calc((100vw - 56px) / 2);
 }
 
 .kloudi-modal-trigger > img:hover {
