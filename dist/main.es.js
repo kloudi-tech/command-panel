@@ -2508,6 +2508,11 @@ var useSubmitQuery = function useSubmitQuery(props) {
       error = _useState6[0],
       setError = _useState6[1];
 
+  var _useState7 = useState(defaultPayload && defaultPayload.q ? defaultPayload.q : undefined),
+      _useState8 = slicedToArray(_useState7, 2),
+      query = _useState8[0],
+      setQuery = _useState8[1];
+
   var execute = useCallback(function (callbackPayload) {
     // TODO: First we use the payload that we had at the time of initialization
     // then we update it with the callback payload. Advantage of this method is
@@ -2515,8 +2520,8 @@ var useSubmitQuery = function useSubmitQuery(props) {
     var newPayload = _objectSpread(_objectSpread({}, defaultPayload), callbackPayload);
 
     setStatus("PENDING");
-    setData([]);
     setError(undefined);
+    setQuery(newPayload.q);
     return submit(newPayload).then(function (response) {
       setData(response);
       setStatus("SUCCESS");
@@ -2532,7 +2537,8 @@ var useSubmitQuery = function useSubmitQuery(props) {
     execute: execute,
     status: status,
     data: data,
-    error: error
+    error: error,
+    query: query
   };
 };
 
@@ -9809,7 +9815,8 @@ function ModalCommandPanel(props) {
       execute = _useSubmitQuery.execute,
       status = _useSubmitQuery.status,
       data = _useSubmitQuery.data,
-      error = _useSubmitQuery.error;
+      error = _useSubmitQuery.error,
+      query = _useSubmitQuery.query;
 
   function handleCommandPanelModeChaned(mode, prevMode) {
     /*
@@ -9841,9 +9848,9 @@ function ModalCommandPanel(props) {
   useEffect(function () {
     if (status === "SUCCESS" || status === "ERROR") {
       setOpen(false);
-      if (props.handleCommandSubmitted) props.handleCommandSubmitted(data);
+      if (props.handleCommandSubmitted) props.handleCommandSubmitted(data, query);
     }
-  }, [data, error, status]);
+  }, [data, error, status, query]);
   useEffect(function () {
     var data = props.suggestions || [];
     data = data.filter(function (item) {

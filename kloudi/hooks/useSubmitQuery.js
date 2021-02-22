@@ -15,6 +15,9 @@ export const useSubmitQuery = (props) => {
   const [status, setStatus] = useState("IDLE");
   const [data, setData] = useState([]);
   const [error, setError] = useState(undefined);
+  const [query, setQuery] = useState(
+    defaultPayload && defaultPayload.q ? defaultPayload.q : undefined
+  );
 
   const execute = useCallback((callbackPayload) => {
     // TODO: First we use the payload that we had at the time of initialization
@@ -23,8 +26,8 @@ export const useSubmitQuery = (props) => {
 
     const newPayload = { ...defaultPayload, ...callbackPayload };
     setStatus("PENDING");
-    setData([]);
     setError(undefined);
+    setQuery(newPayload.q);
 
     return submit(newPayload)
       .then((response) => {
@@ -41,5 +44,5 @@ export const useSubmitQuery = (props) => {
     if (immediate) execute();
   }, [immediate]);
 
-  return { execute, status, data, error };
+  return { execute, status, data, error, query };
 };

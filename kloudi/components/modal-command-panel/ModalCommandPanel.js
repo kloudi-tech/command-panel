@@ -39,7 +39,7 @@ export default function ModalCommandPanel(props) {
       trigger={<img src={logo} alt="kloudi" />}
     />
   );
-  const { execute, status, data, error } = useSubmitQuery({
+  const { execute, status, data, error, query } = useSubmitQuery({
     payload: props.defaultPayload,
   });
 
@@ -76,9 +76,10 @@ export default function ModalCommandPanel(props) {
   useEffect(() => {
     if (status === "SUCCESS" || status === "ERROR") {
       setOpen(false);
-      if (props.handleCommandSubmitted) props.handleCommandSubmitted(data);
+      if (props.handleCommandSubmitted)
+        props.handleCommandSubmitted(data, query);
     }
-  }, [data, error, status]);
+  }, [data, error, status, query]);
 
   useEffect(() => {
     let data = props.suggestions || [];
