@@ -2498,7 +2498,9 @@ var useSubmitQuery = function useSubmitQuery(props) {
       status = _useState2[0],
       setStatus = _useState2[1];
 
-  var _useState3 = useState([]),
+  var _useState3 = useState({
+    cards: []
+  }),
       _useState4 = slicedToArray(_useState3, 2),
       data = _useState4[0],
       setData = _useState4[1];
@@ -9815,8 +9817,12 @@ function ModalCommandPanel(props) {
       execute = _useSubmitQuery.execute,
       status = _useSubmitQuery.status,
       data = _useSubmitQuery.data,
-      error = _useSubmitQuery.error,
       query = _useSubmitQuery.query;
+
+  var _useState11 = useState(data),
+      _useState12 = slicedToArray(_useState11, 2),
+      response = _useState12[0],
+      setResponse = _useState12[1];
 
   function handleCommandPanelModeChaned(mode, prevMode) {
     /*
@@ -9846,11 +9852,11 @@ function ModalCommandPanel(props) {
   }
 
   useEffect(function () {
-    if (status === "SUCCESS" || status === "ERROR") {
+    if ((status === "SUCCESS" || status === "ERROR") && JSON.stringify(res.cards) !== JSON.stringify(data.cards)) {
       setOpen(false);
       if (props.handleCommandSubmitted) props.handleCommandSubmitted(data, query);
     }
-  }, [data, error, status, query]);
+  }, [data, status]);
   useEffect(function () {
     var data = props.suggestions || [];
     data = data.filter(function (item) {

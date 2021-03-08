@@ -42,6 +42,7 @@ export default function ModalCommandPanel(props) {
   const { execute, status, data, error, query } = useSubmitQuery({
     payload: props.defaultPayload,
   });
+  const [response, setResponse] = useState(data);
 
   function handleCommandPanelModeChaned(mode, prevMode) {
     /*
@@ -74,12 +75,15 @@ export default function ModalCommandPanel(props) {
   }
 
   useEffect(() => {
-    if (status === "SUCCESS" || status === "ERROR") {
+    if (
+      (status === "SUCCESS" || status === "ERROR") &&
+      JSON.stringify(res.cards) !== JSON.stringify(data.cards)
+    ) {
       setOpen(false);
       if (props.handleCommandSubmitted)
         props.handleCommandSubmitted(data, query);
     }
-  }, [data, error, status, query]);
+  }, [data, status]);
 
   useEffect(() => {
     let data = props.suggestions || [];

@@ -13,7 +13,7 @@ export const useSubmitQuery = (props) => {
   const defaultPayload = props.payload;
 
   const [status, setStatus] = useState("IDLE");
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({ cards: [] });
   const [error, setError] = useState(undefined);
   const [query, setQuery] = useState(
     defaultPayload && defaultPayload.q ? defaultPayload.q : undefined
