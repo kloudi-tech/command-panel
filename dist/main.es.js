@@ -9852,8 +9852,9 @@ function ModalCommandPanel(props) {
   }
 
   useEffect(function () {
-    if ((status === "SUCCESS" || status === "ERROR") && JSON.stringify(res.cards) !== JSON.stringify(data.cards)) {
+    if ((status === "SUCCESS" || status === "ERROR") && JSON.stringify(response.cards) !== JSON.stringify(data.cards)) {
       setOpen(false);
+      setResponse(response);
       if (props.handleCommandSubmitted) props.handleCommandSubmitted(data, query);
     }
   }, [data, status]);
