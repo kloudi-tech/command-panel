@@ -31,7 +31,7 @@ export default function ModalCommandPanel(props) {
       header={ModalCommandPanelHeader(mode)}
       hotKeys={hotkeys}
       mode={mode}
-      onCommandPanelModeChanged={handleCommandPanelModeChaned}
+      onCommandPanelModeChanged={handleOnModalCommandPanelModeChaned}
       open={open}
       onSelect={handleOnSelect}
       renderCommand={QuerySuggestions}
@@ -44,7 +44,14 @@ export default function ModalCommandPanel(props) {
   });
   const [response, setResponse] = useState(data);
 
-  function handleCommandPanelModeChaned(mode, prevMode) {
+  function handleOnAfterCommandPanelModalOpen() {
+    if (process.env.PLATFORM === "MAC-APP" && window.require) {
+      const { ipcRenderer } = window.require("electron");
+      ipcRenderer.send("HIDE-OPENED-EXTERNAL-LINK-PREVIEW-WINDOW");
+    }
+  }
+
+  function handleOnModalCommandPanelModeChaned(mode, prevMode) {
     /*
      * Step #1: Update the current mode
      */
@@ -66,6 +73,13 @@ export default function ModalCommandPanel(props) {
         else if (item.mode === mode) return item;
       })
     );
+  }
+
+  function handleOnRequestCommandPanelModalClose() {
+    if (process.env.PLATFORM === "MAC-APP" && window.require) {
+      const { ipcRenderer } = window.require("electron");
+      ipcRenderer.send("SHOW-OPENED-EXTERNAL-LINK-PREVIEW-WINDOW");
+    }
   }
 
   function handleOnSelect(command) {
@@ -112,8 +126,10 @@ export default function ModalCommandPanel(props) {
         header={ModalCommandPanelHeader(mode)}
         hotKeys={hotkeys}
         mode={mode}
-        onCommandPanelModeChanged={handleCommandPanelModeChaned}
+        onAfterOpen={handleOnAfterCommandPanelModalOpen}
+        onCommandPanelModeChanged={handleOnModalCommandPanelModeChaned}
         open={open}
+        onRequestClose={handleOnRequestCommandPanelModalClose}
         onSelect={handleOnSelect}
         renderCommand={QuerySuggestions}
         theme={ModalCommandPanelTheme}

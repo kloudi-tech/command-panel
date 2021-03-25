@@ -9797,7 +9797,7 @@ function ModalCommandPanel(props) {
     header: ModalCommandPanelHeader(mode),
     hotKeys: hotkeys,
     mode: mode,
-    onCommandPanelModeChanged: handleCommandPanelModeChaned,
+    onCommandPanelModeChanged: handleOnModalCommandPanelModeChaned,
     open: open,
     onSelect: handleOnSelect,
     renderCommand: QuerySuggestions,
@@ -9824,7 +9824,16 @@ function ModalCommandPanel(props) {
       response = _useState12[0],
       setResponse = _useState12[1];
 
-  function handleCommandPanelModeChaned(mode, prevMode) {
+  function handleOnAfterCommandPanelModalOpen() {
+    if (process.env.PLATFORM === "MAC-APP" && window.require) {
+      var _window$require = window.require("electron"),
+          ipcRenderer = _window$require.ipcRenderer;
+
+      ipcRenderer.send("HIDE-OPENED-EXTERNAL-LINK-PREVIEW-WINDOW");
+    }
+  }
+
+  function handleOnModalCommandPanelModeChaned(mode, prevMode) {
     /*
      * Step #1: Update the current mode
      */
@@ -9841,6 +9850,15 @@ function ModalCommandPanel(props) {
     setCommands(DEFAULT_SUGGESTIONS.filter(function (item) {
       if (!mode) return item;else if (item.mode === mode) return item;
     }));
+  }
+
+  function handleOnRequestCommandPanelModalClose() {
+    if (process.env.PLATFORM === "MAC-APP" && window.require) {
+      var _window$require2 = window.require("electron"),
+          ipcRenderer = _window$require2.ipcRenderer;
+
+      ipcRenderer.send("SHOW-OPENED-EXTERNAL-LINK-PREVIEW-WINDOW");
+    }
   }
 
   function handleOnSelect(command) {
@@ -9885,8 +9903,10 @@ function ModalCommandPanel(props) {
       header: ModalCommandPanelHeader(mode),
       hotKeys: hotkeys,
       mode: mode,
-      onCommandPanelModeChanged: handleCommandPanelModeChaned,
+      onAfterOpen: handleOnAfterCommandPanelModalOpen,
+      onCommandPanelModeChanged: handleOnModalCommandPanelModeChaned,
       open: open,
+      onRequestClose: handleOnRequestCommandPanelModalClose,
       onSelect: handleOnSelect,
       renderCommand: QuerySuggestions,
       theme: ModalCommandPanelTheme,
