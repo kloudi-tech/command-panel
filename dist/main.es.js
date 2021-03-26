@@ -9880,7 +9880,7 @@ function ModalCommandPanel(props) {
     if (["SUCCESS", "ERROR", "STALE-WHILE-REVALIDATE"].indexOf(status) >= 0 && JSON.stringify(response.cards) !== JSON.stringify(data.cards)) {
       setOpen(false);
       setResponse(response);
-      if (props.handleCommandSubmitted) props.handleCommandSubmitted(data, query);
+      if (props.handleCommandSubmitted) props.handleCommandSubmitted(data, query, status);
     }
   }, [data, status]);
   useEffect(function () {

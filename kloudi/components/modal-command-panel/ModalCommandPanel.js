@@ -96,7 +96,7 @@ export default function ModalCommandPanel(props) {
       setOpen(false);
       setResponse(response);
       if (props.handleCommandSubmitted)
-        props.handleCommandSubmitted(data, query);
+        props.handleCommandSubmitted(data, query, status);
     }
   }, [data, status]);
 
