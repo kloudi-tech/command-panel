@@ -2614,6 +2614,8 @@
         var url = UrlUtil.getCompleteURLFromQueryData(to, _query);
 
         if (url.redirect.state !== "INTERNAL-QUERY-SUBMITTED-REDIRECT") {
+          // Adding this check because while performing update queries we can't
+          // send cached data.
           setData(cachedData);
           setStatus("STALE-WHILE-REVALIDATE");
         }

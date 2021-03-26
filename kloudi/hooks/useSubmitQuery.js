@@ -38,6 +38,8 @@ export const useSubmitQuery = (props) => {
         query = cachedData.query.text;
       const url = UrlUtil.getCompleteURLFromQueryData(to, query);
       if (url.redirect.state !== "INTERNAL-QUERY-SUBMITTED-REDIRECT") {
+        // Adding this check because while performing update queries we can't
+        // send cached data.
         setData(cachedData);
         setStatus("STALE-WHILE-REVALIDATE");
       }
