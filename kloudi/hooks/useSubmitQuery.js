@@ -4,6 +4,8 @@ import React, { useState, useEffect, useCallback } from "react";
 
 import remoteSource from "../data/remote/RemoteSource";
 
+import UrlUtil from "../common/UrlUtil";
+
 export const useSubmitQuery = (props) => {
   const submit = async function (payload) {
     const data = await remoteSource.submitQueryForHook(payload);
@@ -32,8 +34,13 @@ export const useSubmitQuery = (props) => {
       cachedData !== undefined &&
       Object.keys(cachedData).length > 0
     ) {
-      setData(cachedData);
-      setStatus("STALE-WHILE-REVALIDATE");
+      const to = cachedData.navigateTo,
+        query = cachedData.query.text;
+      const url = UrlUtil.getCompleteURLFromQueryData(to, query);
+      if (url.redirect.state !== "INTERNAL-QUERY-SUBMITTED-REDIRECT") {
+        setData(cachedData);
+        setStatus("STALE-WHILE-REVALIDATE");
+      }
     }
     setError(undefined);
     setQuery(newPayload.q);
