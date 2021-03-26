@@ -26,6 +26,15 @@ export const useSubmitQuery = (props) => {
 
     const newPayload = { ...defaultPayload, ...callbackPayload };
     setStatus("PENDING");
+    const cachedData = JSON.parse(window.sessionStorage.getItem(newPayload.q));
+    if (
+      cachedData !== null &&
+      cachedData !== undefined &&
+      Object.keys(cachedData).length > 0
+    ) {
+      setData(cachedData);
+      setStatus("STALE-WHILE-REVALIDATE");
+    }
     setError(undefined);
     setQuery(newPayload.q);
 

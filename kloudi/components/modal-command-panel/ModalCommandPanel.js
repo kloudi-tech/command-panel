@@ -90,7 +90,7 @@ export default function ModalCommandPanel(props) {
 
   useEffect(() => {
     if (
-      (status === "SUCCESS" || status === "ERROR") &&
+      ["SUCCESS", "ERROR", "STALE-WHILE-REVALIDATE"].indexOf(status) >= 0 &&
       JSON.stringify(response.cards) !== JSON.stringify(data.cards)
     ) {
       setOpen(false);

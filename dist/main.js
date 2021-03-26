@@ -2530,6 +2530,13 @@
       var newPayload = _objectSpread(_objectSpread({}, defaultPayload), callbackPayload);
 
       setStatus("PENDING");
+      var cachedData = JSON.parse(window.sessionStorage.getItem(newPayload.q));
+
+      if (cachedData !== null && cachedData !== undefined && Object.keys(cachedData).length > 0) {
+        setData(cachedData);
+        setStatus("STALE-WHILE-REVALIDATE");
+      }
+
       setError(undefined);
       setQuery(newPayload.q);
       return submit(newPayload).then(function (response) {
@@ -9878,7 +9885,7 @@
     }
 
     React.useEffect(function () {
-      if ((status === "SUCCESS" || status === "ERROR") && JSON.stringify(response.cards) !== JSON.stringify(data.cards)) {
+      if (["SUCCESS", "ERROR", "STALE-WHILE-REVALIDATE"].indexOf(status) >= 0 && JSON.stringify(response.cards) !== JSON.stringify(data.cards)) {
         setOpen(false);
         setResponse(response);
         if (props.handleCommandSubmitted) props.handleCommandSubmitted(data, query);
