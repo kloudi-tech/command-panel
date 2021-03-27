@@ -9961,9 +9961,9 @@ function ModalCommandPanel(props) {
   }
 
   useEffect(function () {
-    if (["SUCCESS", "ERROR", "STALE-WHILE-REVALIDATE"].indexOf(status) >= 0 && JSON.stringify(response.cards) !== JSON.stringify(data.cards)) {
+    if (["SUCCESS", "ERROR", "STALE-WHILE-REVALIDATE"].indexOf(status) >= 0) {
       setOpen(false);
-      setResponse(response);
+      if (response && Object.keys(response).length > 0 && response.cards && Object.keys(response.cards).length > 0 && data && Object.keys(data).length > 0 && data.cards && Object.keys(data.cards).length > 0 && JSON.stringify(response.cards) !== JSON.stringify(data.cards)) setResponse(response);
       if (props.handleCommandSubmitted) props.handleCommandSubmitted(data, query, status);
     }
   }, [data, status]);
