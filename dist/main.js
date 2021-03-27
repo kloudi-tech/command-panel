@@ -2627,6 +2627,15 @@
         setData(response);
         setStatus("SUCCESS");
       })["catch"](function (error) {
+        setData({
+          cards: [],
+          navigateTo: "query/submit/",
+          query: {
+            response: error.message,
+            text: payload.q
+          },
+          status: error.response.status
+        });
         setError(error);
         setStatus("ERROR");
       });

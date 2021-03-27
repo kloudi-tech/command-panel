@@ -53,6 +53,12 @@ export const useSubmitQuery = (props) => {
         setStatus("SUCCESS");
       })
       .catch((error) => {
+        setData({
+          cards: [],
+          navigateTo: "query/submit/",
+          query: { response: error.message, text: payload.q },
+          status: error.response.status,
+        });
         setError(error);
         setStatus("ERROR");
       });
