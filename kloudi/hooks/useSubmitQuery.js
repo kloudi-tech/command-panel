@@ -56,7 +56,7 @@ export const useSubmitQuery = (props) => {
         setData({
           cards: [],
           navigateTo: "query/submit/",
-          query: { response: error.message, text: payload.q },
+          query: { response: error.message, text: newPayload.q },
           status: error.response.status,
         });
         setError(error);

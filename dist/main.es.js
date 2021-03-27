@@ -2624,7 +2624,7 @@ var useSubmitQuery = function useSubmitQuery(props) {
         navigateTo: "query/submit/",
         query: {
           response: error.message,
-          text: payload.q
+          text: newPayload.q
         },
         status: error.response.status
       });
